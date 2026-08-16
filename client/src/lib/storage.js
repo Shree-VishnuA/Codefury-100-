@@ -1,6 +1,6 @@
 import { initialResumeData } from "./resume-schema";
 
-const STORAGE_KEY = "genforge_resume_data_v1";
+const STORAGE_KEY = "legible_resume_data_v1";
 
 export function loadSavedResumeData() {
   if (typeof window === "undefined") {

@@ -135,7 +135,7 @@ export function AuthModal({ isOpen, onClose, onSignIn, defaultName = "", default
           <Lock className="w-6 h-6 text-[var(--redline)]" />
         </div>
         <DialogTitle className="text-base font-bold text-center font-mono">
-          Sign In to GenForge
+          Sign In to Legible
         </DialogTitle>
         <DialogDescription className="text-center mt-1 text-xs font-mono">
           Sign in to save your ATS resumes, sync across devices, and optimize with Gemini AI.

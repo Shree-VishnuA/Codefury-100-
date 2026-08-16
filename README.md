@@ -1,4 +1,4 @@
-# GenForge - Executive AI Resume Generator & ATS Optimizer
+# Legible - Executive AI Resume Generator & ATS Optimizer
 
 > Built for **CodeFury 9.0**. Transform raw career experience into executive, ATS-optimized single-column resumes using Google Gemini AI, featuring a minimal technical editorial design system, live preview, Google OAuth, MongoDB cloud persistence, and vector PDF exports.
 
@@ -6,7 +6,7 @@
 
 ## 📄 Overview & Key Capabilities
 
-**GenForge** is a full-stack web platform engineered to eliminate resume rejection by Applicant Tracking Systems (ATS). It translates raw project descriptions, job histories, and skill lists into high-impact, ATS-formatted resumes while guaranteeing strict factual integrity (zero hallucination).
+**Legible** is a full-stack web platform engineered to eliminate resume rejection by Applicant Tracking Systems (ATS). It translates raw project descriptions, job histories, and skill lists into high-impact, ATS-formatted resumes while guaranteeing strict factual integrity (zero hallucination).
 
 ### Key Features
 - 🎨 **Minimal Editorial Design System**: Tailored theme using IBM Plex Mono & IBM Plex Sans, crisp monochrome borders, and high-contrast redline (`#B3402B`) accents.

@@ -1,8 +1,8 @@
-# Architecture Documentation — GenForge
+# Architecture Documentation - Legible
 
 ## 1. System Architecture
 
-GenForge is built on Next.js 15 App Router using a client-heavy, server-assisted architecture. All state is maintained locally on the client and autosaved to `localStorage`. Server interaction is strictly restricted to the `/api/generate-resume` route, protecting the `GEMINI_API_KEY` from browser exposure.
+Legible is built as a full-stack monorepo (Vite + React frontend, Express + Node.js backend) using a client-heavy, server-assisted architecture. All state is maintained locally on the client and autosaved to `localStorage`. Server interaction is strictly restricted to the `/api/generate-resume` and `/api/improve-resume` routes, protecting the `GEMINI_API_KEY` from browser exposure.
 
 ```mermaid
 flowchart TD
@@ -22,7 +22,7 @@ flowchart TD
 ## 2. Core User Flow
 
 1. **Information Input**: User enters details across 6 guided steps (Personal, Target Job, Experience, Education, Skills, Extras) or clicks **Try Sample Resume**.
-2. **Autosave**: Every change is stored in `localStorage` (`genforge_resume_data_v1`).
+2. **Autosave**: Every change is stored in `localStorage` (`legible_resume_data_v1`).
 3. **AI Generation**: Clicking **Optimize with AI** sends normalized JSON to `/api/generate-resume`.
 4. **AI Processing**: Server invokes Gemini API with anti-hallucination prompt guardrails.
 5. **Interactive Review**: User reviews proposed AI summary, enhanced bullet points, and ATS analysis before accepting.
@@ -81,12 +81,13 @@ The ATS analyzer evaluates:
 `@react-pdf/renderer` renders PDFs directly in the browser via Web APIs:
 - Prevents server-side canvas or puppeteer overhead.
 - Utilizes standard `Helvetica` fonts guaranteeing ATS parser compatibility.
-- Dynamically imported on the client to avoid Next.js 15 SSR hydration mismatches.
+- Dynamically imported on the client to avoid SSR hydration mismatches.
 
 ---
 
 ## 6. Security & Privacy
 
 - **API Key Protection**: `GEMINI_API_KEY` is loaded strictly via server environment variables.
-- **Zero Database Storage**: Resumes are kept in the user's browser `localStorage`.
+- **Google OAuth**: User authentication via Google Identity Services with server-side JWT verification.
+- **MongoDB Persistence**: Resume data synced to MongoDB Atlas when authenticated, with localStorage fallback.
 - **Sanitized Inputs**: Form inputs are validated before sending to Gemini.

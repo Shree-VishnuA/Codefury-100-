@@ -89,7 +89,7 @@ export function LandingPage({ onLaunchBuilder, onLoadSampleAndLaunch }) {
               never meet a human.
             </h1>
             <p className="text-base sm:text-lg text-[var(--ink)]/70 dark:text-[var(--ink-dark)]/70 leading-relaxed max-w-md mb-9">
-              They meet a parser first. GenForge rewrites your bullet points with
+              They meet a parser first. Legible rewrites your bullet points with
               Gemini, then runs the same keyword pass an ATS would — so you see
               what survives before a recruiter ever does.
             </p>
@@ -221,7 +221,7 @@ export function LandingPage({ onLaunchBuilder, onLoadSampleAndLaunch }) {
               </div>
               <div className="p-8 bg-[var(--highlight)]/10">
                 <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--pass)]">
-                  What GenForge writes
+                  What Legible writes
                 </span>
                 <p className="mt-4 text-[15px] leading-relaxed font-mono">
                   Rebuilt the payments backend's error-handling layer, cutting
@@ -363,7 +363,7 @@ export function LandingPage({ onLaunchBuilder, onLoadSampleAndLaunch }) {
 
         <footer className="border-t border-[var(--ink)]/10 dark:border-[var(--ink-dark)]/10 py-8 text-center">
           <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40">
-            GenForge - built for CodeFury 9.0
+            Legible - built for CodeFury 9.0
           </span>
         </footer>
       </div>

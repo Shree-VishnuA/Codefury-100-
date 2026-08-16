@@ -34,7 +34,7 @@ export function Header({
             className="flex items-baseline gap-2.5 text-left focus:outline-none cursor-pointer shrink-0"
           >
             <span className="font-mono text-base font-bold tracking-tight text-[var(--ink)] dark:text-[var(--ink-dark)]">
-              GenForge
+              Legible
             </span>
             <span className="hidden sm:inline font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--redline)]">
               / resume ops

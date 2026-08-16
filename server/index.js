@@ -30,7 +30,7 @@ app.use("/api", uploadRoutes);
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {
-  res.json({ status: "ok", service: "GenForge Express Backend", timestamp: new Date() });
+  res.json({ status: "ok", service: "Legible Express Backend", timestamp: new Date() });
 });
 
 // Serve frontend static build files from client/dist if available
@@ -41,14 +41,14 @@ app.get("*", (req, res, next) => {
   if (req.path.startsWith("/api")) return next();
   res.sendFile(path.join(clientDistPath, "index.html"), (err) => {
     if (err) {
-      res.status(404).send("GenForge API Backend is running. Frontend dev server is on http://localhost:5173");
+      res.status(404).send("Legible API Backend is running. Frontend dev server is on http://localhost:5173");
     }
   });
 });
 
 if (!process.env.VERCEL) {
   app.listen(PORT, () => {
-    console.log(`🚀 GenForge Express Server running on http://localhost:${PORT}`);
+    console.log(`🚀 Legible Express Server running on http://localhost:${PORT}`);
   });
 }
 

@@ -208,7 +208,7 @@ export function AdditionalForm({
                         type="text"
                         value={proj.name}
                         onChange={(e) => updateProjectField(proj.id, "name", e.target.value)}
-                        placeholder="e.g. GenForge Resume Generator"
+                        placeholder="e.g. Legible Resume Generator"
                       />
                     </div>
 

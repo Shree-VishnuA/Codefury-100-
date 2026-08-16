@@ -11,7 +11,7 @@ export function PDFExportButton({ data }) {
     setIsClient(true);
   }, []);
 
-  const fileName = `${data.personal.fullName ? data.personal.fullName.replace(/\s+/g, "_") : "Resume"}_GenForge.pdf`;
+  const fileName = `${data.personal.fullName ? data.personal.fullName.replace(/\s+/g, "_") : "Resume"}_Legible.pdf`;
 
   if (!isClient) {
     return (

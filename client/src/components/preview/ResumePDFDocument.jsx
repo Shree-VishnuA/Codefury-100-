@@ -115,7 +115,7 @@ export function ResumePDFDocument({ data }) {
     (skills.languages || []).length > 0 || (skills.dsa || []).length > 0 || (skills.frontend || []).length > 0 || (skills.backend || []).length > 0 || (skills.tools || []).length > 0;
 
   return (
-    <Document title={`${personal.fullName || "Resume"} - GenForge.pdf`}>
+    <Document title={`${personal.fullName || "Resume"} - Legible.pdf`}>
       <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <Text style={styles.name}>{personal.fullName || "Your Full Name"}</Text>

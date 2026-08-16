@@ -65,7 +65,7 @@ export function Sidebar({
           className="flex items-baseline gap-2 text-left focus:outline-none cursor-pointer"
         >
           <span className="font-mono text-base font-bold tracking-tight text-[var(--ink)] dark:text-[var(--ink-dark)]">
-            GenForge
+            Legible
           </span>
           <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--redline)]">
             / ops

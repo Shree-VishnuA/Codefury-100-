@@ -20,7 +20,7 @@ export function TargetJobForm({ data, onChange, errors = {} }) {
           Target Job & Industry
         </CardTitle>
         <CardDescription>
-          GenForge uses your target role and job description to tailor achievements and run ATS keyword matching.
+          Legible uses your target role and job description to tailor achievements and run ATS keyword matching.
         </CardDescription>
       </CardHeader>
 

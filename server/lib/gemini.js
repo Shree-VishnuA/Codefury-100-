@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 export function buildSystemPrompt() {
-  return `You are GenForge AI - an elite, world-class executive resume architect, Fortune 500 hiring director, and master Applicant Tracking System (ATS) optimization engine.
+  return `You are Legible AI - an elite, world-class executive resume architect, Fortune 500 hiring director, and master Applicant Tracking System (ATS) optimization engine.
 Your mission is to transform raw user experience into a top 1% executive-caliber resume that dominates ATS scanners and captivates elite engineering recruiters.
 
 ══════════════════════════════════════════════════════════════════
@@ -332,7 +332,7 @@ export async function improveExistingResumeWithGemini(rawText, targetRole, jobDe
     throw new Error("GEMINI_API_KEY is not configured.");
   }
 
-  const systemPrompt = `You are GenForge AI - an elite executive resume architect and master ATS optimization engine.
+  const systemPrompt = `You are Legible AI - an elite executive resume architect and master ATS optimization engine.
 Your goal is to parse raw resume text and rewrite it into a top-tier, ATS-optimized version tailored for the target job role.
 
 MASTER RESUME STANDARDS:

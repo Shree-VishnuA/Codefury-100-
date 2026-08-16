@@ -69,15 +69,15 @@ export const sampleResumeData = {
   projects: [
     {
       id: "proj-1",
-      name: "GenForge AI Resume Builder",
+      name: "Legible AI Resume Builder",
       bullets: [
         "Full-stack AI powered web application generating ATS-optimized resumes from raw user experiences using Next.js and Gemini API.",
         "Built client-side PDF export with zero server dependencies.",
         "Designed real-time ATS keyword analysis scoring algorithm.",
       ],
       technologies: ["Next.js", "JavaScript", "Tailwind CSS", "Gemini API", "React-PDF"],
-      githubLink: "https://github.com/user/genforge",
-      liveLink: "https://genforge.app",
+      githubLink: "https://github.com/user/legible",
+      liveLink: "https://legible.app",
     },
   ],
   certifications: [

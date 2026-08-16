@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 const ResumeSchema = new mongoose.Schema(
   {
     userId: { type: String, required: true, index: true },
-    title: { type: String, default: "My GenForge Resume" },
+    title: { type: String, default: "My Legible Resume" },
     personal: { type: Object, default: {} },
     targetJob: { type: Object, default: {} },
     experience: { type: Array, default: [] },

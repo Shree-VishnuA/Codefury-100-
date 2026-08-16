@@ -80,7 +80,7 @@ export default function App() {
     }
 
     try {
-      const savedUser = localStorage.getItem("genforge_user");
+      const savedUser = localStorage.getItem("legible_user") || localStorage.getItem("genforge_user");
       if (savedUser) {
         setUser(JSON.parse(savedUser));
       }
@@ -198,7 +198,7 @@ export default function App() {
 
     setUser(userToSet);
     try {
-      localStorage.setItem("genforge_user", JSON.stringify(userToSet));
+      localStorage.setItem("legible_user", JSON.stringify(userToSet));
     } catch (e) {
       console.error("Failed to save user session:", e);
     }
@@ -221,6 +221,7 @@ export default function App() {
     setUser(null);
     setActiveView("landing");
     try {
+      localStorage.removeItem("legible_user");
       localStorage.removeItem("genforge_user");
     } catch (e) {
       console.error("Failed to remove saved user session:", e);
