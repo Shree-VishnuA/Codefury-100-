@@ -46,6 +46,15 @@ app.get("*", (req, res, next) => {
   });
 });
 
+app.use((err, req, res, next) => {
+  console.error("Global Error Handler:", err.message);
+  if (req.path.startsWith("/api")) {
+    res.status(err.status || 500).json({ success: false, error: err.message || "An unexpected server error occurred." });
+  } else {
+    next(err);
+  }
+});
+
 if (!process.env.VERCEL) {
   app.listen(PORT, () => {
     console.log(`🚀 Legible Express Server running on http://localhost:${PORT}`);

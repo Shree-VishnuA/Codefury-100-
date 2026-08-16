@@ -110,7 +110,15 @@ export default function App() {
       fetch(`/api/resumes?userId=${encodeURIComponent(user.email)}`, {
         headers: { "x-user-id": user.email },
       })
-        .then((res) => res.json())
+        .then(async (res) => {
+          const contentType = res.headers.get("content-type");
+          if (contentType && contentType.includes("application/json")) {
+            return res.json();
+          } else {
+            const text = await res.text();
+            throw new Error(`Non-JSON response: ${text.substring(0, 100)}`);
+          }
+        })
         .then((resData) => {
           if (resData.success && resData.data) {
             console.log("✅ Fetched user resume from MongoDB:", resData.data);
@@ -123,7 +131,7 @@ export default function App() {
             }
           }
         })
-        .catch((err) => console.error("Error syncing resume from backend:", err));
+        .catch((err) => console.warn("Could not sync resume from backend (this is normal if offline or backend is restarting):", err.message));
     }
   }, [user]);
 
