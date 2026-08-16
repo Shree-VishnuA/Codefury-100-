@@ -8,7 +8,7 @@ export function LivePreview({ data }) {
     (skills.technical || []).length > 0 || (skills.soft || []).length > 0 || (skills.tools || []).length > 0;
 
   return (
-    <div className="w-full bg-white text-gray-900 shadow-xl rounded-xl border border-gray-200 p-8 sm:p-10 font-sans print:shadow-none print:border-none print:p-0 transition-all text-[13px] leading-normal">
+    <div className="w-full bg-white text-gray-900 shadow-2xl shadow-black/30 rounded-2xl border border-white/10 p-8 sm:p-10 font-sans print:shadow-none print:border-none print:p-0 transition-all text-[13px] leading-normal">
       <div className="text-center border-b border-gray-300 pb-4 mb-5">
         <h1 className="text-2xl font-bold uppercase tracking-wide text-gray-900 mb-1">
           {personal.fullName || "Your Full Name"}

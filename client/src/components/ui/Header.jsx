@@ -22,7 +22,7 @@ export function Header({
   const firstLetter = (user?.name || user?.email || "U").trim().charAt(0).toUpperCase();
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-gray-950/90 backdrop-blur-md transition-colors m-0 p-0">
+    <header className="sticky top-0 left-0 right-0 z-50 w-full border-b border-white/10 bg-[#080b14]/80 backdrop-blur-xl transition-colors m-0 p-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Brand Logo & View Switcher */}
         <div className="flex items-center gap-4 shrink-0">

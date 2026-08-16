@@ -40,8 +40,8 @@ export function LandingPage({ onLaunchBuilder, onLoadSampleAndLaunch }) {
   const activeRole = demoRoles[activeRoleIndex];
 
   return (
-    <div className="w-full bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 overflow-hidden">
-      <section className="relative pt-12 pb-20 sm:pt-20 sm:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
+    <div className="w-full bg-[#080b14] text-slate-100 overflow-hidden">
+      <section className="relative pt-16 pb-24 sm:pt-24 sm:pb-32 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-blue-600/20 via-purple-600/20 to-indigo-600/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
 
         <div className="relative z-10 text-center space-y-6 max-w-4xl mx-auto">
@@ -108,7 +108,7 @@ export function LandingPage({ onLaunchBuilder, onLoadSampleAndLaunch }) {
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, delay: 0.4 }}
-          className="mt-16 max-w-4xl mx-auto bg-white dark:bg-gray-900 rounded-3xl p-6 sm:p-8 border border-gray-200 dark:border-gray-800 shadow-2xl space-y-6"
+          className="mt-16 max-w-5xl mx-auto bg-white/[0.04] rounded-3xl p-6 sm:p-8 border border-white/10 shadow-2xl shadow-black/20 space-y-6 backdrop-blur-sm"
         >
           <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-gray-100 dark:border-gray-800 pb-4">
             <div>

@@ -287,7 +287,7 @@ export default function App() {
   const completionStatus = getResumeCompletionStatus(resumeData);
 
   return (
-    <div className="min-h-screen bg-gray-50 dark:bg-gray-950 text-gray-900 dark:text-gray-100 flex flex-col font-sans transition-colors m-0 p-0">
+    <div className="min-h-screen bg-[#080b14] text-slate-100 flex flex-col font-sans transition-colors m-0 p-0">
       {/* Top Sticky Header */}
       <Header
         user={user}
@@ -313,7 +313,18 @@ export default function App() {
           }}
         />
       ) : (
-        <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-6">
+        <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-8">
+          <div className="mb-8 flex items-end justify-between gap-4">
+            <div>
+              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-400">Workspace</p>
+              <h1 className="mt-2 text-3xl font-bold tracking-tight text-white sm:text-4xl">Build a resume that gets read.</h1>
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-400">Shape your story, tune your keywords, and watch the ATS score respond in real time.</p>
+            </div>
+            <div className="hidden rounded-2xl border border-white/10 bg-white/[0.04] px-4 py-3 text-right sm:block">
+              <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500">Current status</p>
+              <p className="mt-1 text-sm font-semibold text-emerald-300">Autosave enabled</p>
+            </div>
+          </div>
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
             {/* Left Column: Multi-Step Form */}
             <div className="lg:col-span-6 space-y-6">
@@ -418,7 +429,7 @@ export default function App() {
 
             {/* Right Column: Live Resume Preview & PDF Download */}
             <div className="lg:col-span-6 space-y-4 lg:sticky lg:top-20">
-              <div className="flex items-center justify-between bg-white dark:bg-gray-800 p-3 rounded-xl border border-gray-200 dark:border-gray-700 shadow-xs">
+              <div className="flex items-center justify-between bg-white/[0.04] p-3 rounded-2xl border border-white/10 shadow-xl shadow-black/10">
                 <div className="flex items-center gap-2">
                   <Eye className="w-4 h-4 text-blue-600 dark:text-blue-400" />
                   <span className="text-xs font-bold text-gray-800 dark:text-gray-200">
@@ -440,7 +451,7 @@ export default function App() {
               </div>
 
               {/* Interactive Live Document */}
-              <div className="max-h-[750px] overflow-y-auto rounded-xl shadow-lg border border-gray-200 dark:border-gray-800">
+              <div className="max-h-[750px] overflow-y-auto rounded-2xl shadow-2xl shadow-black/20 border border-white/10">
                 <LivePreview data={resumeData} />
               </div>
 
