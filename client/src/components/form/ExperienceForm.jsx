@@ -71,12 +71,12 @@ export function ExperienceForm({ data, onChange, errors = {} }) {
   };
 
   return (
-    <Card className="shadow-sm">
+    <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-4 space-y-0">
         <div>
           <CardTitle>
-            <Briefcase className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            Work Experience <span className="text-xs font-normal text-gray-400 dark:text-gray-500">(Optional)</span>
+            <Briefcase className="w-4 h-4 text-[var(--redline)]" />
+            Work Experience <span className="font-mono text-xs font-normal text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40">(Optional)</span>
           </CardTitle>
           <CardDescription>
             Add your professional career history (Optional for students/freshers). Provide bullet points of responsibilities or achievements.
@@ -85,28 +85,26 @@ export function ExperienceForm({ data, onChange, errors = {} }) {
         <Button
           onClick={addExperience}
           size="sm"
-          className="cursor-pointer"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-3.5 h-3.5" />
           Add Experience
         </Button>
       </CardHeader>
 
-      <CardContent className="space-y-6 pt-4">
+      <CardContent className="space-y-6 pt-4 font-mono">
         {data.length === 0 ? (
-          <div className="text-center py-8 border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-xl">
-            <Briefcase className="w-10 h-10 text-gray-400 mx-auto mb-2 opacity-60" />
-            <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+          <div className="text-center py-8 border-2 border-dashed border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15 bg-[var(--paper)] dark:bg-[#161B22]">
+            <Briefcase className="w-8 h-8 text-[var(--ink)]/30 dark:text-[var(--ink-dark)]/30 mx-auto mb-2" />
+            <p className="font-mono text-xs font-semibold text-[var(--ink)]/60 dark:text-[var(--ink-dark)]/60">
               No work experience added (Optional).
             </p>
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1 mb-4">
+            <p className="font-mono text-[11px] text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 mt-1 mb-4">
               Click below to add a job entry or proceed to Education & Skills.
             </p>
             <Button
               onClick={addExperience}
               variant="outline"
               size="sm"
-              className="cursor-pointer text-blue-600 dark:text-blue-400 border-blue-200 dark:border-blue-800 hover:bg-blue-50 dark:hover:bg-blue-950/40"
             >
               + Add Work Experience
             </Button>
@@ -116,10 +114,10 @@ export function ExperienceForm({ data, onChange, errors = {} }) {
             {data.map((exp, index) => (
               <div
                 key={exp.id}
-                className="p-5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 space-y-4 transition-all"
+                className="p-4 border border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15 bg-[var(--paper)] dark:bg-[#161B22] space-y-4 font-mono"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <span className="font-mono text-xs font-bold text-[var(--redline)] uppercase tracking-wider">
                     Experience #{index + 1}
                   </span>
                   <div className="flex items-center gap-1">
@@ -128,38 +126,36 @@ export function ExperienceForm({ data, onChange, errors = {} }) {
                       size="iconSm"
                       onClick={() => moveExperience(index, "up")}
                       disabled={index === 0}
-                      className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 cursor-pointer"
                       title="Move Up"
                     >
-                      <ArrowUp className="w-4 h-4" />
+                      <ArrowUp className="w-3.5 h-3.5" />
                     </Button>
                     <Button
                       variant="ghost"
                       size="iconSm"
                       onClick={() => moveExperience(index, "down")}
                       disabled={index === data.length - 1}
-                      className="text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 cursor-pointer"
                       title="Move Down"
                     >
-                      <ArrowDown className="w-4 h-4" />
+                      <ArrowDown className="w-3.5 h-3.5" />
                     </Button>
                     <Button
                       variant="ghost"
                       size="iconSm"
                       onClick={() => removeExperience(exp.id)}
-                      className="text-red-500 hover:text-red-700 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 cursor-pointer ml-1"
+                      className="text-[var(--redline)] hover:bg-[var(--redline)] hover:text-white"
                       title="Remove Entry"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-3.5 h-3.5" />
                     </Button>
                   </div>
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div>
-                    <Label className="mb-1 block">Company Name</Label>
-                    <div className="relative">
-                      <Building className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
+                    <Label className="mb-1 block font-mono text-xs font-semibold">Company Name</Label>
+                    <div className="relative font-sans">
+                      <Building className="w-4 h-4 text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 absolute left-3 top-2.5 z-10" />
                       <Input
                         type="text"
                         value={exp.company}
@@ -171,9 +167,9 @@ export function ExperienceForm({ data, onChange, errors = {} }) {
                   </div>
 
                   <div>
-                    <Label className="mb-1 block">Job Title / Position</Label>
-                    <div className="relative">
-                      <Briefcase className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
+                    <Label className="mb-1 block font-mono text-xs font-semibold">Job Title / Position</Label>
+                    <div className="relative font-sans">
+                      <Briefcase className="w-4 h-4 text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 absolute left-3 top-2.5 z-10" />
                       <Input
                         type="text"
                         value={exp.position}
@@ -185,9 +181,9 @@ export function ExperienceForm({ data, onChange, errors = {} }) {
                   </div>
 
                   <div>
-                    <Label className="mb-1 block">Location</Label>
-                    <div className="relative">
-                      <MapPin className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
+                    <Label className="mb-1 block font-mono text-xs font-semibold">Location</Label>
+                    <div className="relative font-sans">
+                      <MapPin className="w-4 h-4 text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 absolute left-3 top-2.5 z-10" />
                       <Input
                         type="text"
                         value={exp.location}
@@ -200,8 +196,8 @@ export function ExperienceForm({ data, onChange, errors = {} }) {
 
                   <div className="grid grid-cols-2 gap-2">
                     <div>
-                      <Label className="mb-1 flex items-center gap-1">
-                        <CalendarIcon className="w-3 h-3 text-blue-500" /> Start Date
+                      <Label className="mb-1 flex items-center gap-1 font-mono text-xs font-semibold">
+                        <CalendarIcon className="w-3 h-3 text-[var(--redline)]" /> Start Date
                       </Label>
                       <DatePicker
                         value={exp.startDate || ""}
@@ -212,15 +208,15 @@ export function ExperienceForm({ data, onChange, errors = {} }) {
                     </div>
 
                     <div>
-                      <Label className="mb-1 flex items-center gap-1">
-                        <CalendarIcon className="w-3 h-3 text-blue-500" /> End Date
+                      <Label className="mb-1 flex items-center gap-1 font-mono text-xs font-semibold">
+                        <CalendarIcon className="w-3 h-3 text-[var(--redline)]" /> End Date
                       </Label>
                       {exp.isCurrent ? (
                         <Input
                           type="text"
                           disabled
                           value="Present"
-                          className="bg-gray-100 dark:bg-gray-700/50 text-gray-700 dark:text-gray-200 font-semibold"
+                          className="bg-[var(--ink)]/10 dark:bg-[var(--ink-dark)]/10 text-[var(--ink)] dark:text-[var(--ink-dark)] font-mono font-bold"
                         />
                       ) : (
                         <DatePicker
@@ -250,11 +246,11 @@ export function ExperienceForm({ data, onChange, errors = {} }) {
                         updateExperienceField(exp.id, "endDate", "Present");
                       }
                     }}
-                    className="w-4 h-4 text-blue-600 rounded focus:ring-blue-500 border-gray-300 dark:border-gray-700 cursor-pointer"
+                    className="w-4 h-4 cursor-pointer"
                   />
                   <label
                     htmlFor={`current-${exp.id}`}
-                    className="text-xs font-medium text-gray-700 dark:text-gray-300 cursor-pointer"
+                    className="font-mono text-xs font-medium text-[var(--ink)] dark:text-[var(--ink-dark)] cursor-pointer"
                   >
                     I currently work here
                   </label>
@@ -262,24 +258,23 @@ export function ExperienceForm({ data, onChange, errors = {} }) {
 
                 <div className="space-y-2 pt-2">
                   <div className="flex items-center justify-between">
-                    <Label className="block">
+                    <Label className="block font-mono text-xs font-semibold">
                       Responsibilities & Achievements (Bullet Points)
                     </Label>
-                    <Button
-                      variant="ghost"
-                      size="sm"
+                    <button
+                      type="button"
                       onClick={() => addBullet(exp.id)}
-                      className="text-xs text-blue-600 dark:text-blue-400 font-semibold hover:underline flex items-center gap-1 cursor-pointer h-auto p-0 hover:bg-transparent"
+                      className="font-mono text-xs text-[var(--redline)] font-semibold hover:underline flex items-center gap-1 cursor-pointer"
                     >
                       <ListPlus className="w-3.5 h-3.5" />
                       + Add Bullet
-                    </Button>
+                    </button>
                   </div>
 
-                  <div className="space-y-2">
+                  <div className="space-y-2 font-sans">
                     {exp.bullets.map((bullet, bIdx) => (
                       <div key={bIdx} className="flex items-center gap-2">
-                        <span className="text-gray-400 text-xs font-bold">•</span>
+                        <span className="text-[var(--redline)] text-xs font-bold font-mono">•</span>
                         <Input
                           type="text"
                           value={bullet}
@@ -292,9 +287,9 @@ export function ExperienceForm({ data, onChange, errors = {} }) {
                             variant="ghost"
                             size="iconSm"
                             onClick={() => removeBullet(exp.id, bIdx)}
-                            className="text-gray-400 hover:text-red-500 cursor-pointer"
+                            className="text-[var(--ink)]/40 hover:text-[var(--redline)] cursor-pointer"
                           >
-                            <X className="w-4 h-4" />
+                            <X className="w-3.5 h-3.5" />
                           </Button>
                         )}
                       </div>

@@ -83,7 +83,7 @@ export const sampleResumeData = {
   certifications: [
     {
       id: "cert-1",
-      name: "AWS Certified Solutions Architect – Associate",
+      name: "AWS Certified Solutions Architect - Associate",
       issuer: "Amazon Web Services",
       date: "2023-04",
       url: "https://aws.amazon.com/verification",
@@ -92,23 +92,23 @@ export const sampleResumeData = {
   achievements: [
     {
       id: "ach-1",
-      title: "1st Place – SF Tech Hackathon 2024 (Generative AI Track)",
+      title: "1st Place - SF Tech Hackathon 2024 (Generative AI Track)",
     },
     {
       id: "ach-2",
-      title: "Top 5% – LeetCode (Global ranking, 1800+ problems solved)",
+      title: "Top 5% - LeetCode (Global ranking, 1800+ problems solved)",
     },
     {
       id: "ach-3",
-      title: "AWS Certified Solutions Architect – Associate (Score: 920/1000)",
+      title: "AWS Certified Solutions Architect - Associate (Score: 920/1000)",
     },
     {
       id: "ach-4",
-      title: "Open Source Contributor – 200+ GitHub stars on personal CLI tooling project",
+      title: "Open Source Contributor - 200+ GitHub stars on personal CLI tooling project",
     },
     {
       id: "ach-5",
-      title: "Dean's List – University of California, Berkeley (2017, 2018, 2019)",
+      title: "Dean's List - University of California, Berkeley (2017, 2018, 2019)",
     },
   ],
 };

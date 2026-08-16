@@ -21,7 +21,6 @@ export function AuthModal({ isOpen, onClose, onSignIn, defaultName = "", default
     }
   }, [isOpen, defaultName, defaultEmail]);
 
-  // Initialize Google Identity Services button when modal opens
   useEffect(() => {
     if (!isOpen || !googleBtnRef.current) return;
 
@@ -37,7 +36,7 @@ export function AuthModal({ isOpen, onClose, onSignIn, defaultName = "", default
 
       window.google.accounts.id.renderButton(googleBtnRef.current, {
         type: "standard",
-        shape: "pill",
+        shape: "square",
         theme: "outline",
         size: "large",
         text: "continue_with",
@@ -47,7 +46,6 @@ export function AuthModal({ isOpen, onClose, onSignIn, defaultName = "", default
       return true;
     };
 
-    // GSI script may still be loading — retry until available
     if (!tryInit()) {
       const interval = setInterval(() => {
         if (tryInit()) clearInterval(interval);
@@ -56,7 +54,6 @@ export function AuthModal({ isOpen, onClose, onSignIn, defaultName = "", default
     }
   }, [isOpen]);
 
-  // Called by Google with the credential JWT
   const handleGoogleCredential = async (response) => {
     setGoogleLoading(true);
     setError("");
@@ -91,22 +88,21 @@ export function AuthModal({ isOpen, onClose, onSignIn, defaultName = "", default
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
       <DialogClose onClick={onClose} />
       <DialogHeader className="text-center items-center">
-        <div className="w-14 h-14 mx-auto rounded-2xl bg-gradient-to-tr from-blue-600 via-indigo-600 to-purple-600 text-white flex items-center justify-center shadow-lg shadow-indigo-500/30 mb-2">
-          <Lock className="w-7 h-7" />
+        <div className="w-12 h-12 mx-auto bg-[var(--ink)] dark:bg-[var(--ink-dark)] text-[var(--paper)] dark:text-[var(--paper-dark)] flex items-center justify-center mb-2">
+          <Lock className="w-6 h-6 text-[var(--redline)]" />
         </div>
-        <DialogTitle className="text-xl text-center">
+        <DialogTitle className="text-base font-bold text-center font-mono">
           Sign In to GenForge
         </DialogTitle>
-        <DialogDescription className="text-center mt-1 text-xs">
+        <DialogDescription className="text-center mt-1 text-xs font-mono">
           Sign in to save your ATS resumes, sync across devices, and optimize with Gemini AI.
         </DialogDescription>
       </DialogHeader>
 
-      <div className="space-y-4 my-2 text-left">
-        {/* ── Google Sign-In Button (rendered by GSI SDK) ── */}
+      <div className="space-y-4 my-2 text-left font-mono">
         <div className="w-full flex flex-col items-center gap-2">
           {googleLoading ? (
-            <div className="flex items-center gap-2 py-3 text-sm text-slate-500 dark:text-slate-400">
+            <div className="flex items-center gap-2 py-3 text-xs text-[var(--ink)]/50 dark:text-[var(--ink-dark)]/50">
               <Loader2 className="w-4 h-4 animate-spin" />
               Signing in with Google…
             </div>
@@ -119,24 +115,22 @@ export function AuthModal({ isOpen, onClose, onSignIn, defaultName = "", default
           )}
         </div>
 
-        {/* ── Divider ── */}
         <div className="relative my-1 text-center">
           <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-gray-200 dark:border-gray-700" />
+            <div className="w-full border-t border-[var(--ink)]/10 dark:border-[var(--ink-dark)]/10" />
           </div>
-          <span className="relative px-3 text-[11px] bg-white dark:bg-[#0f172a] text-gray-400 font-medium">
+          <span className="relative px-3 text-[10px] uppercase tracking-wider bg-[var(--paper)] dark:bg-[#161B22] text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 font-mono">
             OR sign in with email
           </span>
         </div>
 
-        {/* ── Email / Name form ── */}
-        <form onSubmit={handleSubmit} className="space-y-3">
+        <form onSubmit={handleSubmit} className="space-y-3 font-sans">
           <div>
-            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
-              Full Name <span className="text-gray-400 font-normal">(optional)</span>
+            <label className="block text-xs font-semibold text-[var(--ink)] dark:text-[var(--ink-dark)] mb-1 font-mono">
+              Full Name <span className="text-[var(--ink)]/40 font-normal">(optional)</span>
             </label>
             <div className="relative">
-              <User className="w-4 h-4 absolute left-3 top-2.5 text-gray-400" />
+              <User className="w-4 h-4 absolute left-3 top-2.5 text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40" />
               <Input
                 type="text"
                 placeholder="e.g. John Smith"
@@ -148,11 +142,11 @@ export function AuthModal({ isOpen, onClose, onSignIn, defaultName = "", default
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-gray-700 dark:text-gray-300 mb-1">
-              Email Address <span className="text-red-500">*</span>
+            <label className="block text-xs font-semibold text-[var(--ink)] dark:text-[var(--ink-dark)] mb-1 font-mono">
+              Email Address <span className="text-[var(--redline)]">*</span>
             </label>
             <div className="relative">
-              <Mail className="w-4 h-4 absolute left-3 top-2.5 text-gray-400" />
+              <Mail className="w-4 h-4 absolute left-3 top-2.5 text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40" />
               <Input
                 type="email"
                 required
@@ -165,23 +159,23 @@ export function AuthModal({ isOpen, onClose, onSignIn, defaultName = "", default
                 className="pl-9 text-xs py-2"
               />
             </div>
-            {error && <p className="text-[11px] text-red-500 mt-1 font-medium">{error}</p>}
+            {error && <p className="text-[11px] text-[var(--redline)] mt-1 font-mono">{error}</p>}
           </div>
 
           <Button
             type="submit"
-            className="w-full py-2.5 text-xs font-bold bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 text-white cursor-pointer shadow-md flex items-center justify-center gap-1.5"
+            className="w-full py-2.5 text-xs font-bold"
           >
             <span>Sign In / Create Account</span>
             <ArrowRight className="w-3.5 h-3.5" />
           </Button>
         </form>
 
-        <div className="pt-1 flex items-center justify-center">
+        <div className="pt-1 flex items-center justify-center font-mono">
           <button
             type="button"
             onClick={onClose}
-            className="text-[11px] hover:underline text-gray-500 dark:text-gray-400 cursor-pointer"
+            className="text-[11px] hover:underline text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 cursor-pointer"
           >
             Cancel
           </button>

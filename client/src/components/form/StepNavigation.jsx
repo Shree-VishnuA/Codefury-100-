@@ -2,35 +2,38 @@ import React from "react";
 import { User, Briefcase, GraduationCap, Wrench, FolderCheck, CheckCircle2, Target } from "lucide-react";
 
 const STEPS = [
-  { id: 1, label: "Personal Info", icon: User },
+  { id: 1, label: "Personal", icon: User },
   { id: 2, label: "Target Job", icon: Target },
   { id: 3, label: "Experience", icon: Briefcase },
   { id: 4, label: "Education", icon: GraduationCap },
   { id: 5, label: "Skills", icon: Wrench },
-  { id: 6, label: "Projects & Extras", icon: FolderCheck },
+  { id: 6, label: "Projects", icon: FolderCheck },
 ];
 
 export function StepNavigation({ currentStep, setCurrentStep }) {
   const progressPercent = Math.round(((currentStep - 1) / (STEPS.length - 1)) * 100);
 
   return (
-    <div className="w-full rounded-2xl bg-white dark:bg-white/[0.04] p-4 border border-slate-200 dark:border-white/10 shadow-md dark:shadow-2xl dark:shadow-black/10 mb-6 backdrop-blur-sm">
+    <div
+      className="w-full bg-[var(--paper)] dark:bg-[var(--paper-dark)] p-4 border mb-6"
+      style={{ borderColor: "rgba(21,28,36,0.12)" }}
+    >
       <div className="flex items-center justify-between mb-2">
-        <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+        <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)]/50 dark:text-[var(--ink-dark)]/50">
           Step {currentStep} of {STEPS.length}: {STEPS[currentStep - 1].label}
         </span>
-        <span className="text-xs font-bold text-blue-600 dark:text-blue-400">
-          {progressPercent}% Complete
+        <span className="font-mono text-[10px] font-bold text-[var(--redline)]">
+          {progressPercent}%
         </span>
       </div>
-      <div className="w-full bg-gray-100 dark:bg-gray-700 h-2 rounded-full overflow-hidden mb-5">
+      <div className="w-full bg-[var(--ink)]/10 dark:bg-[var(--ink-dark)]/10 h-0.5 mb-4">
         <div
-          className="bg-gradient-to-r from-blue-600 to-indigo-600 h-full transition-all duration-300 ease-out"
+          className="bg-[var(--redline)] h-full transition-all duration-300 ease-out"
           style={{ width: `${progressPercent}%` }}
         />
       </div>
 
-      <div className="grid grid-cols-3 sm:grid-cols-6 gap-2">
+      <div className="grid grid-cols-3 sm:grid-cols-6 gap-1">
         {STEPS.map((step) => {
           const Icon = step.icon;
           const isActive = currentStep === step.id;
@@ -40,19 +43,19 @@ export function StepNavigation({ currentStep, setCurrentStep }) {
             <button
               key={step.id}
               onClick={() => setCurrentStep(step.id)}
-              className={`flex flex-col items-center justify-center p-2.5 rounded-lg text-xs font-medium transition-all duration-200 relative cursor-pointer ${
+              className={`flex flex-col items-center justify-center p-2 text-[10px] font-mono font-medium transition-all duration-200 cursor-pointer border-b-2 ${
                 isActive
-                  ? "bg-blue-50 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border border-blue-200 dark:border-blue-800 shadow-sm"
+                  ? "border-b-[var(--redline)] text-[var(--ink)] dark:text-[var(--ink-dark)] bg-[var(--ink)]/[0.03] dark:bg-[var(--ink-dark)]/[0.03]"
                   : isDone
-                  ? "bg-gray-50 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700"
-                  : "text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300"
+                  ? "border-b-[var(--pass)] text-[var(--ink)]/60 dark:text-[var(--ink-dark)]/60 hover:bg-[var(--ink)]/[0.03]"
+                  : "border-b-transparent text-[var(--ink)]/30 dark:text-[var(--ink-dark)]/30 hover:text-[var(--ink)]/60 dark:hover:text-[var(--ink-dark)]/60"
               }`}
             >
-              <div className="flex items-center gap-1.5 mb-1">
+              <div className="flex items-center gap-1 mb-1">
                 {isDone ? (
-                  <CheckCircle2 className="w-4 h-4 text-emerald-500 dark:text-emerald-400" />
+                  <CheckCircle2 className="w-3.5 h-3.5 text-[var(--pass)]" />
                 ) : (
-                  <Icon className={`w-4 h-4 ${isActive ? "text-blue-600 dark:text-blue-400" : ""}`} />
+                  <Icon className={`w-3.5 h-3.5 ${isActive ? "text-[var(--redline)]" : ""}`} />
                 )}
               </div>
               <span className="truncate w-full text-center">{step.label}</span>

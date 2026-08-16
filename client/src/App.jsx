@@ -37,24 +37,21 @@ import { Button } from "@/components/ui/button";
 
 export default function App() {
   const [activeView, setActiveView] = useState("landing");
-  const [builderTab, setBuilderTab] = useState("scratch"); // "scratch" | "improve"
+  const [builderTab, setBuilderTab] = useState("scratch");
   const [currentStep, setCurrentStep] = useState(1);
   const [darkMode, setDarkMode] = useState(true);
   const [resumeData, setResumeData] = useState(initialResumeData);
   const [stepErrors, setStepErrors] = useState({});
 
-  // User state
   const [user, setUser] = useState(null);
   const [showAuthModal, setShowAuthModal] = useState(false);
   const [pendingAction, setPendingAction] = useState(null);
 
-  // AI State
   const [isGeneratingAI, setIsGeneratingAI] = useState(false);
   const [aiResult, setAiResult] = useState(null);
   const [showAIModal, setShowAIModal] = useState(false);
   const [atsAnalysis, setAtsAnalysis] = useState(null);
 
-  // Protection: Builder workspace requires sign in
   useEffect(() => {
     if (activeView === "builder" && !user) {
       setActiveView("landing");
@@ -75,7 +72,6 @@ export default function App() {
     setActiveView(targetView);
   };
 
-    // Load saved data and theme on mount
   useEffect(() => {
     const saved = loadSavedResumeData();
     if (saved) {
@@ -83,7 +79,6 @@ export default function App() {
       if (saved.atsAnalysis) setAtsAnalysis(saved.atsAnalysis);
     }
 
-    // Restore user session if available
     try {
       const savedUser = localStorage.getItem("genforge_user");
       if (savedUser) {
@@ -93,13 +88,11 @@ export default function App() {
       console.error("Failed to load saved user session:", e);
     }
 
-    // Check dark mode preference
     if (window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches) {
       setDarkMode(true);
     }
   }, []);
 
-  // Update theme class on HTML element
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -108,12 +101,10 @@ export default function App() {
     }
   }, [darkMode]);
 
-  // Auto-save to localStorage
   useEffect(() => {
     saveResumeData(resumeData);
   }, [resumeData]);
 
-  // Sync saved resume from backend if user is logged in
   useEffect(() => {
     if (user && user.email) {
       fetch(`/api/resumes?userId=${encodeURIComponent(user.email)}`, {
@@ -136,7 +127,6 @@ export default function App() {
     }
   }, [user]);
 
-  // Auto-save to Express MongoDB API
   const saveResumeToBackend = async (dataToSave) => {
     if (!user || !user.email) return;
     try {
@@ -168,7 +158,6 @@ export default function App() {
     if (currentStep < 6) {
       setCurrentStep(currentStep + 1);
     } else {
-      // Trigger celebratory confetti on reaching final step
       confetti({
         particleCount: 80,
         spread: 70,
@@ -200,7 +189,6 @@ export default function App() {
     setStepErrors({});
   };
 
-  // Sign-In handler (custom or demo user)
   const handleLogin = (customUser) => {
     const userToSet = {
       name: customUser?.name || "User",
@@ -216,7 +204,6 @@ export default function App() {
     }
     setShowAuthModal(false);
 
-    // Sync user with backend
     fetch("/api/auth/google", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -240,7 +227,6 @@ export default function App() {
     }
   };
 
-  // Gemini AI Optimization Handler via Express Backend
   const handleTriggerAI = async () => {
     setIsGeneratingAI(true);
     setStepErrors({});
@@ -318,8 +304,7 @@ export default function App() {
   const completionStatus = getResumeCompletionStatus(resumeData);
 
   return (
-    <div className="min-h-screen bg-slate-100 dark:bg-[#080b14] text-slate-900 dark:text-slate-100 flex flex-col font-sans transition-colors m-0 p-0">
-      {/* Top Sticky Header */}
+    <div className="min-h-screen bg-[var(--paper)] dark:bg-[var(--paper-dark)] text-[var(--ink)] dark:text-[var(--ink-dark)] flex flex-col font-sans transition-colors m-0 p-0">
       <Header
         user={user}
         onLogin={() => setShowAuthModal(true)}
@@ -334,7 +319,6 @@ export default function App() {
         setActiveView={(v) => handleNavigateView(v)}
       />
 
-      {/* Main View Router */}
       {activeView === "landing" ? (
         <LandingPage
           onLaunchBuilder={() => handleNavigateView("builder")}
@@ -344,55 +328,55 @@ export default function App() {
         />
       ) : (
         <main className="flex-1 max-w-[1440px] w-full mx-auto px-4 sm:px-6 lg:px-10 py-8">
-          {/* ── Builder Mode Tabs ── */}
           <div className="mb-8 flex flex-col sm:flex-row sm:items-end justify-between gap-6">
             <div>
-              <p className="text-xs font-semibold uppercase tracking-[0.24em] text-blue-600 dark:text-blue-400">Workspace</p>
-              <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 dark:text-white sm:text-4xl">
+              <span className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--redline)]">Workspace</span>
+              <h1 className="mt-2 font-mono font-bold text-2xl sm:text-3xl tracking-tight text-[var(--ink)] dark:text-[var(--ink-dark)]">
                 {builderTab === "scratch" ? "Build a resume that gets read." : "Improve your existing resume."}
               </h1>
-              <p className="mt-2 max-w-2xl text-sm leading-6 text-slate-500 dark:text-slate-400">
+              <p className="mt-2 max-w-2xl text-sm leading-6 text-[var(--ink)]/60 dark:text-[var(--ink-dark)]/60">
                 {builderTab === "scratch"
                   ? "Shape your story, tune your keywords, and watch the ATS score respond in real time."
                   : "Upload your current resume and let AI rewrite, polish, and ATS-optimize it."}
               </p>
             </div>
 
-            {/* Tab switcher */}
-            <div className="flex items-center gap-1 p-1 rounded-2xl bg-slate-100 dark:bg-white/[0.05] border border-slate-200 dark:border-white/10 shrink-0">
+            <div
+              className="flex items-center border shrink-0"
+              style={{ borderColor: "rgba(21,28,36,0.15)" }}
+            >
               <button
                 type="button"
                 onClick={() => setBuilderTab("scratch")}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                className={`flex items-center gap-2 px-4 py-2.5 font-mono text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${
                   builderTab === "scratch"
-                    ? "bg-white dark:bg-gray-800 text-blue-600 dark:text-blue-400 shadow-sm border border-slate-200 dark:border-white/10"
-                    : "text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
+                    ? "bg-[var(--ink)] dark:bg-[var(--ink-dark)] text-[var(--paper)] dark:text-[var(--paper-dark)]"
+                    : "text-[var(--ink)]/50 dark:text-[var(--ink-dark)]/50 hover:text-[var(--ink)] dark:hover:text-[var(--ink-dark)] hover:bg-[var(--ink)]/[0.04]"
                 }`}
               >
-                <Layers className="w-4 h-4 shrink-0" />
+                <Layers className="w-3.5 h-3.5 shrink-0" />
                 Build from Scratch
               </button>
               <button
                 type="button"
                 onClick={() => setBuilderTab("improve")}
-                className={`flex items-center gap-2 px-4 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer whitespace-nowrap ${
+                className={`flex items-center gap-2 px-4 py-2.5 font-mono text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap border-l ${
                   builderTab === "improve"
-                    ? "bg-white dark:bg-gray-800 text-purple-600 dark:text-purple-400 shadow-sm border border-slate-200 dark:border-white/10"
-                    : "text-slate-500 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
+                    ? "bg-[var(--ink)] dark:bg-[var(--ink-dark)] text-[var(--paper)] dark:text-[var(--paper-dark)]"
+                    : "text-[var(--ink)]/50 dark:text-[var(--ink-dark)]/50 hover:text-[var(--ink)] dark:hover:text-[var(--ink-dark)] hover:bg-[var(--ink)]/[0.04]"
                 }`}
+                style={{ borderColor: "rgba(21,28,36,0.15)" }}
               >
-                <Sparkles className="w-4 h-4 shrink-0" />
+                <Sparkles className="w-3.5 h-3.5 shrink-0" />
                 Improve Existing
               </button>
             </div>
           </div>
 
-          {/* ── Tab Content ── */}
           {builderTab === "improve" ? (
             <ResumeImprover user={user} />
           ) : (
             <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              {/* Left Column: Multi-Step Form */}
               <div className="lg:col-span-6 space-y-6">
                 <StepNavigation
                   currentStep={currentStep}
@@ -445,37 +429,38 @@ export default function App() {
                   />
                 )}
 
-                {/* Step Navigation Controls */}
                 <div className="flex items-center justify-between pt-2">
-                  <Button
+                  <button
+                    type="button"
                     onClick={handlePrevStep}
                     disabled={currentStep === 1}
-                    variant="outline"
-                    className="cursor-pointer"
+                    className="inline-flex items-center gap-2 px-4 py-2 font-mono text-xs font-semibold border border-[var(--ink)]/20 dark:border-[var(--ink-dark)]/20 hover:border-[var(--ink)] dark:hover:border-[var(--ink-dark)] text-[var(--ink)] dark:text-[var(--ink-dark)] transition-colors disabled:opacity-40 cursor-pointer"
                   >
-                    <ArrowLeft className="w-4 h-4" /> Previous
-                  </Button>
+                    <ArrowLeft className="w-3.5 h-3.5" /> Previous
+                  </button>
                   <div className="flex items-center gap-3">
                     {currentStep === 6 ? (
-                      <Button
+                      <button
+                        type="button"
                         onClick={handleTriggerAI}
                         disabled={isGeneratingAI}
-                        className="bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 cursor-pointer shadow-md"
+                        className="inline-flex items-center gap-2 px-4 py-2 font-mono text-xs font-bold bg-[var(--ink)] dark:bg-[var(--ink-dark)] text-[var(--paper)] dark:text-[var(--paper-dark)] hover:bg-[var(--redline)] dark:hover:bg-[var(--redline)] dark:hover:text-[var(--paper)] transition-colors disabled:opacity-50 cursor-pointer"
                       >
-                        <Sparkles className="w-4 h-4" /> Optimize & Calculate ATS
-                      </Button>
+                        <Sparkles className="w-3.5 h-3.5" /> Optimize with AI
+                      </button>
                     ) : (
-                      <Button
+                      <button
+                        type="button"
                         onClick={handleNextStep}
-                        className="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer shadow-sm"
+                        className="inline-flex items-center gap-2 px-4 py-2 font-mono text-xs font-bold bg-[var(--ink)] dark:bg-[var(--ink-dark)] text-[var(--paper)] dark:text-[var(--paper-dark)] hover:bg-[var(--redline)] dark:hover:bg-[var(--redline)] dark:hover:text-[var(--paper)] transition-colors cursor-pointer"
                       >
-                        Next Step <ArrowRight className="w-4 h-4" />
-                      </Button>
+                        Next Step <ArrowRight className="w-3.5 h-3.5" />
+                      </button>
                     )}
                   </div>
                 </div>
 
-                <div className="pt-4 border-t border-gray-200 dark:border-gray-800">
+                <div className="pt-4 border-t" style={{ borderColor: "rgba(21,28,36,0.1)" }}>
                   <ATSPanel
                     analysis={atsAnalysis}
                     onTriggerAI={handleTriggerAI}
@@ -484,23 +469,28 @@ export default function App() {
                 </div>
               </div>
 
-              {/* Right Column: Live Resume Preview */}
               <div className="lg:col-span-6 space-y-4 lg:sticky lg:top-20">
-                <div className="flex items-center justify-between bg-white dark:bg-white/[0.04] p-3 rounded-2xl border border-slate-200 dark:border-white/10 shadow-xl shadow-black/10">
+                <div
+                  className="flex items-center justify-between bg-[var(--paper)] dark:bg-[var(--paper-dark)] p-3 border"
+                  style={{ borderColor: "rgba(21,28,36,0.12)" }}
+                >
                   <div className="flex items-center gap-2">
-                    <Eye className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                    <span className="text-xs font-bold text-gray-800 dark:text-gray-200">Live PDF Canvas Preview</span>
+                    <Eye className="w-3.5 h-3.5 text-[var(--redline)]" />
+                    <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-[var(--ink)] dark:text-[var(--ink-dark)]">Live Preview</span>
                   </div>
                   <div className="flex items-center gap-2">
-                    <span className="text-[11px] font-semibold text-gray-500 dark:text-gray-400">
-                      {completionStatus.percentage}% Complete
+                    <span className="font-mono text-[10px] text-[var(--ink)]/50 dark:text-[var(--ink-dark)]/50">
+                      {completionStatus.percentage}%
                     </span>
-                    <div className="w-16 bg-gray-200 dark:bg-gray-700 h-2 rounded-full overflow-hidden">
-                      <div className="bg-blue-600 h-full transition-all" style={{ width: `${completionStatus.percentage}%` }} />
+                    <div className="w-16 bg-[var(--ink)]/10 dark:bg-[var(--ink-dark)]/10 h-0.5">
+                      <div className="bg-[var(--redline)] h-full transition-all" style={{ width: `${completionStatus.percentage}%` }} />
                     </div>
                   </div>
                 </div>
-                <div className="max-h-[750px] overflow-y-auto rounded-2xl shadow-2xl shadow-black/20 border border-slate-200 dark:border-white/10">
+                <div
+                  className="max-h-[750px] overflow-y-auto border shadow-xl"
+                  style={{ borderColor: "rgba(21,28,36,0.12)" }}
+                >
                   <LivePreview data={resumeData} />
                 </div>
                 <div className="pt-2">
@@ -512,10 +502,8 @@ export default function App() {
         </main>
       )}
 
-      {/* AI Loading Animation Modal */}
       <AILoadingModal isOpen={isGeneratingAI} />
 
-      {/* AI Optimization Review Modal */}
       <AIReviewModal
         isOpen={showAIModal}
         aiResult={aiResult}
@@ -524,7 +512,6 @@ export default function App() {
         onClose={() => setShowAIModal(false)}
       />
 
-      {/* Authentication Modal */}
       <AuthModal
         isOpen={showAuthModal}
         onClose={() => setShowAuthModal(false)}

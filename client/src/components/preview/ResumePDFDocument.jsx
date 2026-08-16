@@ -197,7 +197,7 @@ export function ResumePDFDocument({ data }) {
                 </View>
                 <View style={{ alignItems: "flex-end" }}>
                   <Text style={styles.itemDate}>
-                    {edu.startDate} – {edu.endDate}
+                    {edu.startDate} - {edu.endDate}
                   </Text>
                   {edu.gpa ? <Text style={styles.itemDate}>GPA: {edu.gpa}</Text> : null}
                 </View>
@@ -216,7 +216,7 @@ export function ResumePDFDocument({ data }) {
                     {exp.position} <Text style={styles.itemSubtitle}>| {exp.company}</Text>
                   </Text>
                   <Text style={styles.itemDate}>
-                    {exp.startDate} – {exp.isCurrent ? "Present" : exp.endDate || "Present"}
+                    {exp.startDate} - {exp.isCurrent ? "Present" : exp.endDate || "Present"}
                     {exp.location ? ` • ${exp.location}` : ""}
                   </Text>
                 </View>
@@ -275,7 +275,8 @@ export function ResumePDFDocument({ data }) {
                   </View>
                 ) : null}
               </View>
-            ))}
+            );
+          })}
           </View>
         ) : null}
 
@@ -285,7 +286,7 @@ export function ResumePDFDocument({ data }) {
             {certifications.map((cert) => (
               <View key={cert.id} style={styles.itemHeader}>
                 <Text style={styles.itemTitle}>
-                  {cert.name} <Text style={styles.itemSubtitle}>— {cert.issuer}</Text>
+                  {cert.name} <Text style={styles.itemSubtitle}>- {cert.issuer}</Text>
                 </Text>
                 <Text style={styles.itemDate}>{cert.date}</Text>
               </View>

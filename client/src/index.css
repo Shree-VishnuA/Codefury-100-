@@ -1,33 +1,37 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap");
 @import "tailwindcss";
 
 @custom-variant dark (&:where(.dark, .dark *));
 
-/* Light mode defaults */
+:root {
+  --paper: #EEF0E9;
+  --paper-dark: #12151A;
+  --ink: #151C24;
+  --ink-dark: #ECE9DF;
+  --redline: #B3402B;
+  --highlight: #F0BE33;
+  --pass: #2F6F52;
+}
+
 html, body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
-  background-color: #f1f5f9;
-  color: #0f172a;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background-color: var(--paper);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
 }
 
-/* Dark mode overrides */
 .dark html,
 .dark body,
 html.dark,
 body.dark {
-  background-color: #080b14;
-  color: #f8fafc;
+  background-color: var(--paper-dark);
+  color: var(--ink-dark);
 }
 
-.dark body {
-  background-image: radial-gradient(circle at 15% 10%, rgba(59, 130, 246, 0.12), transparent 28rem), radial-gradient(circle at 85% 5%, rgba(139, 92, 246, 0.1), transparent 24rem);
-}
-
-/* Ensure hover cursor pointer for all buttons, clickable elements, and form controls */
 button,
 [role="button"],
 input[type="button"],
@@ -40,7 +44,6 @@ select,
   cursor: pointer !important;
 }
 
-/* Custom scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
@@ -49,18 +52,9 @@ select,
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #cbd5e1;
-  border-radius: 9999px;
+  background-color: rgba(21, 28, 36, 0.2);
+  border-radius: 0;
 }
 .dark ::-webkit-scrollbar-thumb {
-  background-color: #374151;
-}
-
-@keyframes pulseGlow {
-  0%, 100% { opacity: 0.4; transform: scale(1); }
-  50% { opacity: 0.8; transform: scale(1.05); }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 4s infinite ease-in-out;
+  background-color: rgba(236, 233, 223, 0.2);
 }

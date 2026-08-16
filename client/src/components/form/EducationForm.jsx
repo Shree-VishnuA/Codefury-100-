@@ -31,11 +31,11 @@ export function EducationForm({ data, onChange, errors = {} }) {
   };
 
   return (
-    <Card className="shadow-sm">
+    <Card>
       <CardHeader className="flex flex-row items-center justify-between pb-4 space-y-0">
         <div>
           <CardTitle>
-            <GraduationCap className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+            <GraduationCap className="w-4 h-4 text-[var(--redline)]" />
             Education History
           </CardTitle>
           <CardDescription>
@@ -45,29 +45,26 @@ export function EducationForm({ data, onChange, errors = {} }) {
         <Button
           onClick={addEducation}
           size="sm"
-          variant="accent"
-          className="cursor-pointer"
         >
-          <Plus className="w-4 h-4" />
+          <Plus className="w-3.5 h-3.5" />
           Add Education
         </Button>
       </CardHeader>
 
-      <CardContent className="space-y-6 pt-4">
+      <CardContent className="space-y-6 pt-4 font-mono">
         {data.length === 0 ? (
-          <div className="text-center py-8 border-2 border-dashed border-gray-200 dark:border-gray-700 rounded-xl">
-            <GraduationCap className="w-10 h-10 text-gray-400 mx-auto mb-2 opacity-60" />
-            <p className="text-sm font-medium text-gray-600 dark:text-gray-400">
+          <div className="text-center py-8 border-2 border-dashed border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15 bg-[var(--paper)] dark:bg-[#161B22]">
+            <GraduationCap className="w-8 h-8 text-[var(--ink)]/30 dark:text-[var(--ink-dark)]/30 mx-auto mb-2" />
+            <p className="font-mono text-xs font-semibold text-[var(--ink)]/60 dark:text-[var(--ink-dark)]/60">
               No education entries added yet.
             </p>
-            <p className="text-xs text-gray-400 dark:text-gray-500 mt-1 mb-4">
+            <p className="font-mono text-[11px] text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 mt-1 mb-4">
               Click below to add your degree details.
             </p>
             <Button
               onClick={addEducation}
               variant="outline"
               size="sm"
-              className="cursor-pointer text-indigo-600 dark:text-indigo-400 border-indigo-200 dark:border-indigo-800 hover:bg-indigo-50 dark:hover:bg-indigo-950/40"
             >
               + Add Education Entry
             </Button>
@@ -77,30 +74,30 @@ export function EducationForm({ data, onChange, errors = {} }) {
             {data.map((edu, index) => (
               <div
                 key={edu.id}
-                className="p-5 rounded-xl border border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 space-y-4"
+                className="p-4 border border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15 bg-[var(--paper)] dark:bg-[#161B22] space-y-4 font-mono"
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
+                  <span className="font-mono text-xs font-bold text-[var(--redline)] uppercase tracking-wider">
                     Education #{index + 1}
                   </span>
                   <Button
                     variant="ghost"
                     size="iconSm"
                     onClick={() => removeEducation(edu.id)}
-                    className="text-red-500 hover:text-red-700 dark:hover:text-red-400 hover:bg-red-50 dark:hover:bg-red-950/40 cursor-pointer"
+                    className="text-[var(--redline)] hover:bg-[var(--redline)] hover:text-white"
                     title="Remove Education"
                   >
-                    <Trash2 className="w-4 h-4" />
+                    <Trash2 className="w-3.5 h-3.5" />
                   </Button>
                 </div>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 font-sans">
                   <div>
-                    <Label className="mb-1 block">
-                      Institution / University <span className="text-red-500">*</span>
+                    <Label className="mb-1 block font-mono text-xs font-semibold">
+                      Institution / University <span className="text-[var(--redline)]">*</span>
                     </Label>
                     <div className="relative">
-                      <School className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
+                      <School className="w-4 h-4 text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 absolute left-3 top-2.5 z-10" />
                       <Input
                         type="text"
                         value={edu.institution}
@@ -112,11 +109,11 @@ export function EducationForm({ data, onChange, errors = {} }) {
                   </div>
 
                   <div>
-                    <Label className="mb-1 block">
-                      Degree <span className="text-red-500">*</span>
+                    <Label className="mb-1 block font-mono text-xs font-semibold">
+                      Degree <span className="text-[var(--redline)]">*</span>
                     </Label>
                     <div className="relative">
-                      <GraduationCap className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
+                      <GraduationCap className="w-4 h-4 text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 absolute left-3 top-2.5 z-10" />
                       <Input
                         type="text"
                         value={edu.degree}
@@ -128,9 +125,9 @@ export function EducationForm({ data, onChange, errors = {} }) {
                   </div>
 
                   <div>
-                    <Label className="mb-1 block">Field of Study / Major</Label>
+                    <Label className="mb-1 block font-mono text-xs font-semibold">Field of Study / Major</Label>
                     <div className="relative">
-                      <BookOpen className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
+                      <BookOpen className="w-4 h-4 text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 absolute left-3 top-2.5 z-10" />
                       <Input
                         type="text"
                         value={edu.fieldOfStudy}
@@ -142,9 +139,9 @@ export function EducationForm({ data, onChange, errors = {} }) {
                   </div>
 
                   <div>
-                    <Label className="mb-1 block">GPA / CGPA (Optional)</Label>
+                    <Label className="mb-1 block font-mono text-xs font-semibold">GPA / CGPA (Optional)</Label>
                     <div className="relative">
-                      <Award className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
+                      <Award className="w-4 h-4 text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 absolute left-3 top-2.5 z-10" />
                       <Input
                         type="text"
                         value={edu.gpa || ""}
@@ -156,8 +153,8 @@ export function EducationForm({ data, onChange, errors = {} }) {
                   </div>
 
                   <div>
-                    <Label className="mb-1 flex items-center gap-1">
-                      <CalendarIcon className="w-3 h-3 text-indigo-500" /> Start Date
+                    <Label className="mb-1 flex items-center gap-1 font-mono text-xs font-semibold">
+                      <CalendarIcon className="w-3 h-3 text-[var(--redline)]" /> Start Date
                     </Label>
                     <DatePicker
                       value={edu.startDate || ""}
@@ -168,8 +165,8 @@ export function EducationForm({ data, onChange, errors = {} }) {
                   </div>
 
                   <div>
-                    <Label className="mb-1 flex items-center gap-1">
-                      <CalendarIcon className="w-3 h-3 text-indigo-500" /> End / Expected Date
+                    <Label className="mb-1 flex items-center gap-1 font-mono text-xs font-semibold">
+                      <CalendarIcon className="w-3 h-3 text-[var(--redline)]" /> End / Expected Date
                     </Label>
                     <DatePicker
                       value={edu.endDate || ""}

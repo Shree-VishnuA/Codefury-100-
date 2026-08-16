@@ -3,20 +3,20 @@ import { cn } from "@/lib/utils";
 
 const buttonVariants = {
   variant: {
-    default: "bg-blue-600 text-white hover:bg-blue-700 dark:bg-blue-600 dark:hover:bg-blue-500 shadow-sm",
-    destructive: "bg-red-600 text-white hover:bg-red-700 dark:bg-red-600 dark:hover:bg-red-500 shadow-sm",
-    outline: "border border-gray-300 dark:border-gray-700 bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700/70 shadow-xs",
-    secondary: "bg-gray-100 text-gray-900 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-100 dark:hover:bg-gray-700",
-    ghost: "text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-800 hover:text-gray-900 dark:hover:text-white",
-    link: "text-blue-600 underline-offset-4 hover:underline dark:text-blue-400 p-0 h-auto",
-    accent: "bg-indigo-600 text-white hover:bg-indigo-700 dark:bg-indigo-600 dark:hover:bg-indigo-500 shadow-sm",
+    default: "bg-[var(--ink)] text-[var(--paper)] dark:bg-[var(--ink-dark)] dark:text-[var(--paper-dark)] hover:bg-[var(--redline)] dark:hover:bg-[var(--redline)] dark:hover:text-[var(--paper)] font-mono text-xs uppercase tracking-wider font-bold rounded-none",
+    destructive: "bg-[var(--redline)] text-white hover:opacity-90 font-mono text-xs uppercase tracking-wider font-bold rounded-none",
+    outline: "border border-[var(--ink)]/25 dark:border-[var(--ink-dark)]/25 bg-transparent text-[var(--ink)] dark:text-[var(--ink-dark)] hover:border-[var(--ink)] dark:hover:border-[var(--ink-dark)] hover:bg-[var(--ink)]/[0.04] dark:hover:bg-[var(--ink-dark)]/[0.04] font-mono text-xs font-semibold rounded-none",
+    secondary: "bg-[var(--ink)]/10 text-[var(--ink)] dark:bg-[var(--ink-dark)]/10 dark:text-[var(--ink-dark)] hover:bg-[var(--ink)]/20 dark:hover:bg-[var(--ink-dark)]/20 font-mono text-xs font-semibold rounded-none",
+    ghost: "text-[var(--ink)]/70 dark:text-[var(--ink-dark)]/70 hover:text-[var(--ink)] dark:hover:text-[var(--ink-dark)] hover:bg-[var(--ink)]/[0.05] font-mono text-xs font-semibold rounded-none",
+    link: "text-[var(--redline)] underline-offset-4 hover:underline font-mono p-0 h-auto",
+    accent: "bg-[var(--redline)] text-white hover:opacity-90 font-mono text-xs uppercase tracking-wider font-bold rounded-none",
   },
   size: {
-    default: "h-9 px-4 py-2 text-xs sm:text-sm",
-    sm: "h-8 rounded-md px-3 text-xs",
-    lg: "h-10 rounded-md px-8 text-base",
-    icon: "h-9 w-9 p-0 flex items-center justify-center rounded-lg",
-    iconSm: "h-7 w-7 p-0 flex items-center justify-center rounded-md",
+    default: "h-9 px-4 py-2 text-xs sm:text-xs",
+    sm: "h-8 px-3 text-[11px]",
+    lg: "h-10 px-6 text-xs",
+    icon: "h-8 w-8 p-0 flex items-center justify-center rounded-none",
+    iconSm: "h-7 w-7 p-0 flex items-center justify-center rounded-none",
   },
 };
 
@@ -31,7 +31,7 @@ export const Button = React.forwardRef(
         type={type}
         disabled={disabled}
         className={cn(
-          "inline-flex items-center justify-center gap-2 font-semibold transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 active:scale-[0.98] cursor-pointer rounded-lg whitespace-nowrap shrink-0",
+          "inline-flex items-center justify-center gap-2 font-mono transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-[var(--redline)] disabled:pointer-events-none disabled:opacity-40 cursor-pointer rounded-none whitespace-nowrap shrink-0",
           variantStyles,
           sizeStyles,
           className

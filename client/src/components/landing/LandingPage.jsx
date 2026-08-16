@@ -1,341 +1,372 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  Sparkles,
-  Zap,
+  PenTool,
+  ScanLine,
+  Highlighter,
   CheckCircle2,
   XCircle,
-  FileCheck,
+  ClipboardCheck,
   ArrowRight,
-  ShieldCheck,
-  Gauge,
-  Cpu,
-  MousePointerClick,
+  Moon,
+  Sun,
 } from "lucide-react";
 
+
+const TOKENS = {
+  paper: "#EEF0E9",
+  paperDark: "#12151A",
+  ink: "#151C24",
+  inkDark: "#ECE9DF",
+  redline: "#B3402B",
+  highlight: "#F0BE33",
+  pass: "#2F6F52",
+};
+
 export function LandingPage({ onLaunchBuilder, onLoadSampleAndLaunch }) {
+  const [dark, setDark] = useState(false);
+  const [scanned, setScanned] = useState(false);
   const [activeRoleIndex, setActiveRoleIndex] = useState(0);
 
   const demoRoles = [
     {
-      role: "Senior Machine Learning Engineer",
+      role: "ML Engineer",
       score: 94,
       matched: ["Python", "PyTorch", "LLM APIs", "Docker", "REST APIs"],
       missing: ["CUDA Optimization", "Kubernetes"],
     },
     {
-      role: "Full-Stack Web Developer",
+      role: "Full-Stack Dev",
       score: 91,
       matched: ["React", "Next.js", "TypeScript", "Node.js", "PostgreSQL"],
       missing: ["GraphQL", "CI/CD"],
     },
     {
-      role: "Technical Product Manager",
+      role: "Product Manager",
       score: 87,
-      matched: ["Agile/Scrum", "Product Roadmap", "User Research", "SQL"],
+      matched: ["Agile/Scrum", "Roadmapping", "User Research", "SQL"],
       missing: ["A/B Testing", "Mixpanel"],
     },
   ];
-
   const activeRole = demoRoles[activeRoleIndex];
 
+  const intake = [
+    {
+      field: "Contact + role",
+      detail: "Name, target title, and the raw facts — dates, companies, numbers.",
+    },
+    {
+      field: "Gemini pass",
+      detail: "Rewrites phrasing with active verbs. Never invents a metric you didn't give it.",
+    },
+    {
+      field: "Scanner pass",
+      detail: "Same keyword logic a corporate ATS runs, shown to you before a recruiter sees it.",
+    },
+    {
+      field: "Export",
+      detail: "Single-column, client-side PDF. No account wall to download your own document.",
+    },
+  ];
+
   return (
-    <div className="w-full bg-slate-100 dark:bg-[#080b14] text-slate-900 dark:text-slate-100 overflow-hidden min-h-screen">
-      {/* Hero Section */}
-      <section className="relative pt-12 pb-20 sm:pt-20 sm:pb-28 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
-        <div className="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-gradient-to-tr from-blue-400/10 via-purple-400/10 to-indigo-400/10 dark:from-blue-600/20 dark:via-purple-600/20 dark:to-indigo-600/20 rounded-full blur-3xl pointer-events-none animate-pulse-glow" />
+    <div
+      className={dark ? "dark" : ""}
+      style={{ "--paper": TOKENS.paper, "--paper-dark": TOKENS.paperDark, "--ink": TOKENS.ink, "--ink-dark": TOKENS.inkDark, "--redline": TOKENS.redline, "--highlight": TOKENS.highlight, "--pass": TOKENS.pass }}
+    >
+      <div className="min-h-screen bg-[var(--paper)] dark:bg-[var(--paper-dark)] text-[var(--ink)] dark:text-[var(--ink-dark)] font-sans transition-colors duration-300">
 
-        <div className="relative z-10 text-center space-y-6 max-w-4xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-blue-100 dark:bg-blue-900/40 border border-blue-200 dark:border-blue-500/30 text-blue-700 dark:text-blue-300 text-xs font-semibold backdrop-blur-md"
-          >
-            <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-            <span>GenForge AI Resume & ATS Optimization Engine</span>
-          </motion.div>
+        {/* Hero */}
+        <section className="max-w-6xl mx-auto px-6 pt-16 pb-20 grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
+          <div>
+            <div className="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.2em] text-[var(--redline)] mb-5">
+              <span className="w-1.5 h-1.5 bg-[var(--redline)]" />
+              File 001 — Intake
+            </div>
+            <h1 className="font-mono font-bold text-[2.5rem] sm:text-[3.25rem] leading-[1.05] tracking-tight mb-6">
+              Most resumes
+              <br />
+              never meet a human.
+            </h1>
+            <p className="text-base sm:text-lg text-[var(--ink)]/70 dark:text-[var(--ink-dark)]/70 leading-relaxed max-w-md mb-9">
+              They meet a parser first. GenForge rewrites your bullet points with
+              Gemini, then runs the same keyword pass an ATS would — so you see
+              what survives before a recruiter ever does.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <button
+                type="button"
+                onClick={onLaunchBuilder}
+                className="group inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-bold bg-[var(--ink)] text-[var(--paper)] dark:bg-[var(--ink-dark)] dark:text-[var(--paper-dark)] hover:bg-[var(--redline)] dark:hover:bg-[var(--redline)] dark:hover:text-[var(--paper)] transition-colors"
+              >
+                <PenTool className="w-4 h-4" />
+                Start my resume
+                <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5" />
+              </button>
+              <button
+                type="button"
+                onClick={onLoadSampleAndLaunch}
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 text-sm font-semibold border border-[var(--ink)]/25 dark:border-[var(--ink-dark)]/25 hover:border-[var(--ink)] dark:hover:border-[var(--ink-dark)] transition-colors"
+              >
+                Load a sample
+              </button>
+            </div>
+          </div>
 
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="text-4xl sm:text-6xl font-extrabold tracking-tight text-slate-900 dark:text-white leading-tight"
-          >
-            Turn your experience into a{" "}
-            <span className="bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-500 bg-clip-text text-transparent">
-              resume that gets you hired.
+          {/* Signature element: scanned document mock */}
+          <div className="relative">
+            <div
+              className="relative bg-white dark:bg-[#1B2029] border border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15 p-7 pt-6"
+              style={{ boxShadow: "7px 7px 0 var(--ink)", transform: "rotate(0.4deg)" }}
+            >
+              <div className="flex items-center justify-between mb-5 pb-3 border-b border-[var(--ink)]/10 dark:border-[var(--ink-dark)]/10">
+                <div className="flex gap-1.5">
+                  <span className="w-2 h-2 rounded-full bg-[var(--redline)]" />
+                  <span className="w-2 h-2 rounded-full bg-[var(--highlight)]" />
+                  <span className="w-2 h-2 rounded-full bg-[var(--pass)]" />
+                </div>
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40">
+                  resume.pdf
+                </span>
+              </div>
+
+              {/* fake resume lines */}
+              <div className="space-y-2.5 mb-2">
+                <div className="h-3 w-2/5 bg-[var(--ink)]/70 dark:bg-[var(--ink-dark)]/70" />
+                <div className="h-2 w-1/4 bg-[var(--ink)]/25 dark:bg-[var(--ink-dark)]/25 mb-3" />
+                {[90, 75, 95, 60, 85, 70].map((w, i) => (
+                  <div
+                    key={i}
+                    className="h-2 bg-[var(--ink)]/15 dark:bg-[var(--ink-dark)]/15"
+                    style={{ width: `${w}%` }}
+                  />
+                ))}
+              </div>
+
+              {/* scan bar */}
+              {!scanned && (
+                <motion.div
+                  className="absolute left-0 right-0 h-8 bg-gradient-to-b from-[var(--highlight)]/0 via-[var(--highlight)]/25 to-[var(--highlight)]/0"
+                  initial={{ top: "20%" }}
+                  animate={{ top: ["20%", "85%", "20%"] }}
+                  transition={{ duration: 2.6, repeat: Infinity, ease: "easeInOut" }}
+                />
+              )}
+
+              {/* annotations */}
+              <div className="mt-5 space-y-2">
+                <AnimatePresence mode="wait">
+                  {!scanned ? (
+                    <motion.div
+                      key="flag"
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      className="flex items-center gap-2 font-mono text-[11px] text-[var(--redline)]"
+                    >
+                      <XCircle className="w-3.5 h-3.5 shrink-0" />
+                      TWO-COLUMN LAYOUT — 0% PARSEABLE
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="pass"
+                      initial={{ opacity: 0, y: 4 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      className="flex items-center gap-2 font-mono text-[11px] text-[var(--pass)]"
+                    >
+                      <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+                      SINGLE COLUMN — 100% PARSEABLE
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setScanned((s) => !s)}
+                className="mt-6 w-full inline-flex items-center justify-center gap-2 py-2.5 font-mono text-xs uppercase tracking-wider border border-[var(--ink)]/20 dark:border-[var(--ink-dark)]/20 hover:bg-[var(--ink)] hover:text-[var(--paper)] dark:hover:bg-[var(--ink-dark)] dark:hover:text-[var(--paper-dark)] transition-colors"
+              >
+                <ScanLine className="w-3.5 h-3.5" />
+                {scanned ? "Reset scan" : "Run ATS scan"}
+              </button>
+            </div>
+            <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 mt-3 block text-center">
+              Live simulation — not your actual data
             </span>
-          </motion.h1>
+          </div>
+        </section>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-base sm:text-lg text-slate-600 dark:text-slate-300 max-w-2xl mx-auto leading-relaxed"
-          >
-            75%+ of resumes are discarded by Applicant Tracking Systems before a human reads them.
-            GenForge uses Google Gemini AI to optimize phrasing, eliminate errors, and calculate keyword match scores—with zero fake metrics.
-          </motion.p>
+        {/* Redline comparison */}
+        <section className="border-y border-[var(--ink)]/10 dark:border-[var(--ink-dark)]/10 bg-white dark:bg-[#161B22] py-20">
+          <div className="max-w-5xl mx-auto px-6">
+            <div className="mb-12">
+              <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--redline)]">
+                Exhibit A — Same bullet, two drafts
+              </span>
+              <h2 className="font-mono font-bold text-2xl sm:text-3xl mt-2">
+                Gemini edits phrasing. It doesn't invent facts.
+              </h2>
+            </div>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4"
-          >
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-0 border border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15">
+              <div className="p-8 border-b md:border-b-0 md:border-r border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15">
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40">
+                  What you typed
+                </span>
+                <p className="mt-4 text-[15px] leading-relaxed font-mono">
+                  <span className="line-through decoration-[var(--redline)] decoration-2 text-[var(--ink)]/50 dark:text-[var(--ink-dark)]/50">
+                    worked on the backend for the payments team and helped fix bugs
+                  </span>
+                </p>
+              </div>
+              <div className="p-8 bg-[var(--highlight)]/10">
+                <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--pass)]">
+                  What GenForge writes
+                </span>
+                <p className="mt-4 text-[15px] leading-relaxed font-mono">
+                  Rebuilt the payments backend's error-handling layer, cutting
+                  failed-transaction tickets{" "}
+                  <mark className="bg-[var(--highlight)]/60 px-0.5">
+                    [insert your metric here]
+                  </mark>
+                  .
+                </p>
+                <p className="mt-3 text-xs text-[var(--ink)]/50 dark:text-[var(--ink-dark)]/50 italic">
+                  Note: the bracket is real — it asks you for the number instead of guessing one.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Intake form */}
+        <section className="max-w-4xl mx-auto px-6 py-20">
+          <div className="mb-12">
+            <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--redline)]">
+              Form GF-01
+            </span>
+            <h2 className="font-mono font-bold text-2xl sm:text-3xl mt-2">
+              The intake, in order
+            </h2>
+          </div>
+
+          <div className="border border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15 divide-y divide-[var(--ink)]/15 dark:divide-[var(--ink-dark)]/15">
+            {intake.map((item, idx) => (
+              <div key={idx} className="flex items-start gap-5 p-6">
+                <div className="w-5 h-5 mt-0.5 border border-[var(--ink)]/40 dark:border-[var(--ink-dark)]/40 flex items-center justify-center shrink-0">
+                  <ClipboardCheck className="w-3.5 h-3.5 text-[var(--pass)]" />
+                </div>
+                <div>
+                  <div className="flex items-baseline gap-3">
+                    <span className="font-mono text-xs text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40">
+                      {String(idx + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="font-mono font-semibold text-sm">{item.field}</h3>
+                  </div>
+                  <p className="text-sm text-[var(--ink)]/65 dark:text-[var(--ink-dark)]/65 mt-1 leading-relaxed">
+                    {item.detail}
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        {/* ATS report readout */}
+        <section className="border-y border-[var(--ink)]/10 dark:border-[var(--ink-dark)]/10 bg-white dark:bg-[#161B22] py-20">
+          <div className="max-w-4xl mx-auto px-6">
+            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-8">
+              <div>
+                <span className="font-mono text-[11px] uppercase tracking-[0.22em] text-[var(--redline)]">
+                  Report GF-02
+                </span>
+                <h2 className="font-mono font-bold text-2xl sm:text-3xl mt-2">
+                  Keyword readout
+                </h2>
+              </div>
+              <div className="flex border border-[var(--ink)]/20 dark:border-[var(--ink-dark)]/20">
+                {demoRoles.map((r, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    onClick={() => setActiveRoleIndex(idx)}
+                    className={`px-3.5 py-2 font-mono text-xs transition-colors ${
+                      activeRoleIndex === idx
+                        ? "bg-[var(--ink)] text-[var(--paper)] dark:bg-[var(--ink-dark)] dark:text-[var(--paper-dark)]"
+                        : "hover:bg-[var(--ink)]/5 dark:hover:bg-[var(--ink-dark)]/5"
+                    }`}
+                  >
+                    {r.role}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="border border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15 p-8 font-mono text-sm">
+              <div className="flex items-baseline justify-between border-b border-dashed border-[var(--ink)]/25 dark:border-[var(--ink-dark)]/25 pb-3 mb-4">
+                <span className="uppercase tracking-wider text-xs text-[var(--ink)]/50 dark:text-[var(--ink-dark)]/50">
+                  Match score
+                </span>
+                <span className="text-2xl font-bold">{activeRole.score}/100</span>
+              </div>
+
+              <div className="space-y-1.5 mb-5">
+                {activeRole.matched.map((m, i) => (
+                  <div key={i} className="flex items-center justify-between text-[var(--pass)]">
+                    <span className="flex items-center gap-2">
+                      <CheckCircle2 className="w-3.5 h-3.5" /> {m}
+                    </span>
+                    <span className="text-xs">MATCHED</span>
+                  </div>
+                ))}
+              </div>
+              <div className="space-y-1.5">
+                {activeRole.missing.map((m, i) => (
+                  <div key={i} className="flex items-center justify-between text-[var(--redline)]">
+                    <span className="flex items-center gap-2">
+                      <Highlighter className="w-3.5 h-3.5" /> {m}
+                    </span>
+                    <span className="text-xs">SUGGESTED</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Closing */}
+        <section className="max-w-4xl mx-auto px-6 py-24 text-center">
+          <div className="inline-flex flex-col items-center gap-4">
+            <div
+              className="w-28 h-28 rounded-full border-2 border-[var(--redline)] flex items-center justify-center rotate-[-8deg]"
+              style={{ borderStyle: "double" }}
+            >
+              <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[var(--redline)] text-center leading-tight">
+                Ready
+                <br />
+                to send
+              </span>
+            </div>
+            <h2 className="font-mono font-bold text-2xl sm:text-3xl max-w-md mt-2">
+              Free. No download paywall. No invented metrics.
+            </h2>
             <button
               type="button"
               onClick={onLaunchBuilder}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 px-8 py-4 text-sm font-bold text-white bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 rounded-2xl shadow-xl shadow-indigo-500/25 transition-all duration-200 active:scale-95 cursor-pointer"
+              className="mt-4 inline-flex items-center gap-2 px-7 py-3.5 text-sm font-bold bg-[var(--ink)] text-[var(--paper)] dark:bg-[var(--ink-dark)] dark:text-[var(--paper-dark)] hover:bg-[var(--redline)] dark:hover:bg-[var(--redline)] dark:hover:text-[var(--paper)] transition-colors"
             >
-              <Sparkles className="w-5 h-5" />
-              Build my resume
-              <ArrowRight className="w-4 h-4 ml-1" />
+              <PenTool className="w-4 h-4" />
+              Start building
             </button>
-
-            <button
-              type="button"
-              onClick={onLoadSampleAndLaunch}
-              className="w-full sm:w-auto flex items-center justify-center gap-2 px-6 py-4 text-sm font-semibold text-slate-700 dark:text-slate-200 bg-white dark:bg-white/[0.05] hover:bg-slate-50 dark:hover:bg-white/[0.1] border border-slate-200 dark:border-white/10 rounded-2xl shadow-sm transition-all duration-200 cursor-pointer"
-            >
-              <FileCheck className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-              Try Sample Resume Demo
-            </button>
-          </motion.div>
-        </div>
-
-        {/* Live Interactive ATS Engine Preview Card */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7, delay: 0.4 }}
-          className="mt-16 max-w-4xl mx-auto bg-white dark:bg-white/[0.03] backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-white/10 shadow-2xl shadow-slate-200/50 dark:shadow-black/40 space-y-6"
-        >
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-slate-100 dark:border-white/10 pb-4">
-            <div>
-              <div className="flex items-center gap-2 text-xs font-bold text-blue-600 dark:text-blue-400 uppercase tracking-wider font-mono">
-                <Gauge className="w-4 h-4" /> Live Interactive ATS Engine Simulation
-              </div>
-              <h3 className="text-lg font-extrabold text-slate-900 dark:text-white mt-1">
-                Real-Time Keyword Match & Scoring Preview
-              </h3>
-            </div>
-
-            <div className="flex bg-slate-100 dark:bg-slate-900/80 p-1 rounded-xl gap-1 border border-slate-200 dark:border-white/5">
-              {demoRoles.map((r, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  onClick={() => setActiveRoleIndex(idx)}
-                  className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
-                    activeRoleIndex === idx
-                      ? "bg-blue-600 text-white shadow-sm"
-                      : "text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200"
-                  }`}
-                >
-                  {r.role.split(" ")[0]} Role
-                </button>
-              ))}
-            </div>
           </div>
+        </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
-            <div className="md:col-span-4 flex flex-col items-center justify-center p-6 rounded-2xl bg-blue-50 dark:bg-blue-950/30 border border-blue-100 dark:border-blue-500/20 text-center">
-              <div className="relative w-24 h-24 flex items-center justify-center rounded-full bg-white dark:bg-slate-900 border-4 border-emerald-500 shadow-lg mb-3">
-                <span className="text-3xl font-black text-slate-900 dark:text-white font-mono">
-                  {activeRole.score}
-                </span>
-              </div>
-              <span className="text-xs font-extrabold uppercase tracking-wider text-emerald-600 dark:text-emerald-400 font-mono">
-                / 100 ATS Match Score
-              </span>
-            </div>
-
-            <div className="md:col-span-8 space-y-4">
-              <div>
-                <span className="text-xs font-bold text-slate-500 dark:text-slate-400 block mb-2 uppercase tracking-wider">
-                  Verified Matched Keywords
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  {activeRole.matched.map((m, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 text-xs font-semibold rounded-lg bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-300 border border-emerald-200 dark:border-emerald-800 flex items-center gap-1"
-                    >
-                      <CheckCircle2 className="w-3.5 h-3.5" /> {m}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <span className="text-xs font-bold text-slate-500 dark:text-slate-400 block mb-2 uppercase tracking-wider">
-                  Missing Skill Recommendations
-                </span>
-                <div className="flex flex-wrap gap-2">
-                  {activeRole.missing.map((m, i) => (
-                    <span
-                      key={i}
-                      className="px-3 py-1 text-xs font-semibold rounded-lg bg-amber-50 dark:bg-amber-950/40 text-amber-700 dark:text-amber-300 border border-amber-200 dark:border-amber-800 flex items-center gap-1"
-                    >
-                      ⚠ {m}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </div>
-        </motion.div>
-      </section>
-
-      {/* Why Traditional Resume Tools Fail You */}
-      <section className="py-16 bg-white dark:bg-slate-950/60 border-y border-slate-200 dark:border-white/10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
-              Why Traditional Resume Tools Fail You
-            </h2>
-            <p className="text-sm text-slate-500 dark:text-slate-400">
-              See how GenForge solves the flaws of legacy tools and generic LLMs.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            <motion.div
-              whileHover={{ y: -4 }}
-              className="p-8 rounded-3xl bg-red-50/60 dark:bg-red-950/20 border border-red-200 dark:border-red-900/40 space-y-6"
-            >
-              <div className="flex items-center gap-3 text-red-600 dark:text-red-400">
-                <XCircle className="w-8 h-8" />
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">Traditional Resume Builders</h3>
-              </div>
-              <ul className="space-y-4 text-sm text-slate-700 dark:text-slate-300">
-                <li className="flex items-start gap-3">
-                  <span className="text-red-500 font-bold">✕</span>
-                  <span><strong>75%+ ATS Rejection</strong>: Multi-column tables and fancy icons confuse corporate scanner software.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-red-500 font-bold">✕</span>
-                  <span><strong>AI Hallucination</strong>: Generic LLMs invent fake numbers like "Improved performance by 83%" when you never stated so.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-red-500 font-bold">✕</span>
-                  <span><strong>PDF Export Paywalls</strong>: Building your resume is free, but downloading your PDF requires a $20 subscription.</span>
-                </li>
-              </ul>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ y: -4 }}
-              className="p-8 rounded-3xl bg-gradient-to-br from-blue-50/60 via-indigo-50/60 to-purple-50/60 dark:from-blue-900/20 dark:via-indigo-900/20 dark:to-purple-900/20 border border-blue-200 dark:border-indigo-500/30 space-y-6 shadow-lg"
-            >
-              <div className="flex items-center gap-3 text-blue-600 dark:text-blue-400">
-                <CheckCircle2 className="w-8 h-8 text-emerald-500 dark:text-emerald-400" />
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">GenForge AI Platform</h3>
-              </div>
-              <ul className="space-y-4 text-sm text-slate-700 dark:text-slate-300">
-                <li className="flex items-start gap-3">
-                  <span className="text-emerald-500 font-bold">✓</span>
-                  <span><strong>Fact-Preserving Gemini AI</strong>: Enhances active verbs and phrasing while strictly preserving your exact facts.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-emerald-500 font-bold">✓</span>
-                  <span><strong>Real-Time ATS Keyword Match</strong>: Instant score out of 100 with matched and missing keyword analysis.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-emerald-500 font-bold">✓</span>
-                  <span><strong>Free Client-Side PDF Export</strong>: High-resolution single-column PDF export powered by React-PDF. Zero paywalls.</span>
-                </li>
-              </ul>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4-Step Process Section */}
-      <section className="py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-3">
-          <span className="text-xs font-bold uppercase tracking-widest text-blue-600 dark:text-blue-400 font-mono">
-            Simple 4-Step Workflow
+        <footer className="border-t border-[var(--ink)]/10 dark:border-[var(--ink-dark)]/10 py-8 text-center">
+          <span className="font-mono text-[10px] uppercase tracking-[0.2em] text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40">
+            GenForge - built for CodeFury 9.0
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white">
-            How GenForge Transforms Your Resume
-          </h2>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-          {[
-            {
-              step: "01",
-              title: "Input Details",
-              desc: "Fill in contact info, target job title, and raw experience bullet points.",
-              icon: MousePointerClick,
-            },
-            {
-              step: "02",
-              title: "Gemini AI Engine",
-              desc: "Server-side Gemini AI optimizes phrasing with active verbs and zero hallucinated metrics.",
-              icon: Cpu,
-            },
-            {
-              step: "03",
-              title: "Review ATS Match",
-              desc: "Inspect ATS score out of 100, keyword matches, and missing skill suggestions.",
-              icon: ShieldCheck,
-            },
-            {
-              step: "04",
-              title: "Download PDF",
-              desc: "Export print-ready ATS compliant single-column PDF instantly on client.",
-              icon: Zap,
-            },
-          ].map((item, idx) => {
-            const Icon = item.icon;
-            return (
-              <motion.div
-                key={idx}
-                whileHover={{ y: -6 }}
-                className="p-6 rounded-2xl bg-white dark:bg-white/[0.03] border border-slate-200 dark:border-white/10 shadow-sm dark:shadow-none space-y-4 relative"
-              >
-                <div className="flex items-center justify-between">
-                  <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/40 text-blue-600 dark:text-blue-400 flex items-center justify-center border border-blue-100 dark:border-blue-500/20">
-                    <Icon className="w-5 h-5" />
-                  </div>
-                  <span className="text-2xl font-black text-slate-300 dark:text-slate-600 font-mono">
-                    {item.step}
-                  </span>
-                </div>
-                <h3 className="text-base font-bold text-slate-900 dark:text-white">
-                  {item.title}
-                </h3>
-                <p className="text-xs text-slate-500 dark:text-slate-400 leading-relaxed">
-                  {item.desc}
-                </p>
-              </motion.div>
-            );
-          })}
-        </div>
-      </section>
-
-      {/* Call to Action CTA Card */}
-      <section className="py-20 max-w-5xl mx-auto px-4 text-center">
-        <div className="p-10 rounded-3xl bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 text-white space-y-6 shadow-2xl">
-          <h2 className="text-3xl sm:text-4xl font-extrabold">
-            Ready to Build Your Executive Resume?
-          </h2>
-          <p className="text-sm opacity-90 max-w-xl mx-auto">
-            Try GenForge now. 100% free, autosaved locally, and ready for instant PDF download.
-          </p>
-          <button
-            type="button"
-            onClick={onLaunchBuilder}
-            className="px-8 py-4 text-sm font-bold text-blue-950 bg-white hover:bg-slate-100 rounded-2xl shadow-lg transition-all active:scale-95 inline-flex items-center gap-2 cursor-pointer"
-          >
-            <Sparkles className="w-5 h-5 text-blue-600" /> Start Building Now
-          </button>
-        </div>
-      </section>
+        </footer>
+      </div>
     </div>
   );
 }

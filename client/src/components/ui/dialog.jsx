@@ -27,13 +27,11 @@ export function Dialog({ open, onOpenChange, children, className }) {
 
   return createPortal(
     <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 overflow-y-auto">
-      {/* Backdrop */}
       <div
         onClick={() => onOpenChange?.(false)}
         className="fixed inset-0 bg-black/60 backdrop-blur-xs transition-opacity animate-in fade-in-0 cursor-pointer z-[100]"
       />
-      {/* Modal Dialog Card */}
-      <div className={cn("relative z-[101] w-full max-w-md rounded-2xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-[#0f172a] text-slate-900 dark:text-slate-100 p-6 shadow-2xl animate-in zoom-in-95 fade-in-0 duration-150", className)}>
+      <div className={cn("relative z-[101] w-full max-w-md rounded-none border border-[var(--ink)]/20 dark:border-[var(--ink-dark)]/20 bg-[var(--paper)] dark:bg-[#161B22] text-[var(--ink)] dark:text-[var(--ink-dark)] p-6 shadow-2xl animate-in zoom-in-95 fade-in-0 duration-150 font-sans", className)}>
         {children}
       </div>
     </div>,
@@ -42,15 +40,15 @@ export function Dialog({ open, onOpenChange, children, className }) {
 }
 
 export function DialogHeader({ className, ...props }) {
-  return <div className={cn("flex flex-col space-y-1.5 text-left mb-4", className)} {...props} />;
+  return <div className={cn("flex flex-col space-y-1.5 text-left mb-4 font-mono", className)} {...props} />;
 }
 
 export function DialogTitle({ className, ...props }) {
-  return <h2 className={cn("text-lg font-bold leading-tight tracking-tight text-slate-900 dark:text-white", className)} {...props} />;
+  return <h2 className={cn("font-mono text-base font-bold leading-tight tracking-tight text-[var(--ink)] dark:text-[var(--ink-dark)]", className)} {...props} />;
 }
 
 export function DialogDescription({ className, ...props }) {
-  return <p className={cn("text-xs text-slate-500 dark:text-slate-400 mt-1 leading-relaxed", className)} {...props} />;
+  return <p className={cn("font-mono text-xs text-[var(--ink)]/60 dark:text-[var(--ink-dark)]/60 mt-1 leading-relaxed", className)} {...props} />;
 }
 
 export function DialogClose({ onClick, className }) {
@@ -59,7 +57,7 @@ export function DialogClose({ onClick, className }) {
       type="button"
       onClick={onClick}
       className={cn(
-        "absolute right-4 top-4 rounded-lg p-1.5 text-slate-400 hover:text-slate-600 dark:hover:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors cursor-pointer z-[102]",
+        "absolute right-4 top-4 rounded-none p-1 text-[var(--ink)]/40 hover:text-[var(--redline)] dark:text-[var(--ink-dark)]/40 dark:hover:text-[var(--redline)] transition-colors cursor-pointer z-[102]",
         className
       )}
     >

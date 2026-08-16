@@ -22,7 +22,7 @@ export function Tabs({ value: controlledValue, defaultValue, onValueChange, chil
 
 export function TabsList({ className, children }) {
   return (
-    <div className={cn("inline-flex items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-800/80 p-1 text-gray-500 dark:text-gray-400 w-full sm:w-auto", className)}>
+    <div className={cn("inline-flex items-center justify-start border border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15 bg-[var(--paper)] dark:bg-[var(--paper-dark)] p-0.5 w-full sm:w-auto rounded-none font-mono text-xs", className)}>
       {children}
     </div>
   );
@@ -38,10 +38,10 @@ export function TabsTrigger({ value, className, children, disabled }) {
       disabled={disabled}
       onClick={() => setActiveValue(value)}
       className={cn(
-        "inline-flex items-center justify-center whitespace-nowrap rounded-md px-3 py-1.5 text-xs font-semibold ring-offset-background transition-all focus-visible:outline-none disabled:pointer-events-none disabled:opacity-50 cursor-pointer flex-1 sm:flex-none",
+        "inline-flex items-center justify-center whitespace-nowrap px-3.5 py-1.5 font-mono text-xs font-semibold transition-colors cursor-pointer flex-1 sm:flex-none rounded-none border-b-2",
         isActive
-          ? "bg-white dark:bg-gray-900 text-gray-900 dark:text-white shadow-xs"
-          : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white",
+          ? "border-b-[var(--redline)] bg-[var(--ink)] text-[var(--paper)] dark:bg-[var(--ink-dark)] dark:text-[var(--paper-dark)]"
+          : "border-b-transparent text-[var(--ink)]/60 dark:text-[var(--ink-dark)]/60 hover:text-[var(--ink)] dark:hover:text-[var(--ink-dark)] hover:bg-[var(--ink)]/[0.04]",
         className
       )}
     >

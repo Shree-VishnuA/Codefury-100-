@@ -5,7 +5,7 @@ export const Card = React.forwardRef(({ className, ...props }, ref) => (
   <div
     ref={ref}
     className={cn(
-      "rounded-xl border border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 text-gray-950 dark:text-gray-50 shadow-sm transition-all",
+      "rounded-none border border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15 bg-white dark:bg-[#161B22] text-[var(--ink)] dark:text-[var(--ink-dark)] transition-colors",
       className
     )}
     {...props}
@@ -16,7 +16,7 @@ Card.displayName = "Card";
 export const CardHeader = React.forwardRef(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex flex-col space-y-1.5 p-5 border-b border-gray-100 dark:border-gray-800/80", className)}
+    className={cn("flex flex-col space-y-1.5 p-5 border-b border-[var(--ink)]/10 dark:border-[var(--ink-dark)]/10", className)}
     {...props}
   />
 ));
@@ -25,7 +25,7 @@ CardHeader.displayName = "CardHeader";
 export const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
   <h3
     ref={ref}
-    className={cn("text-base sm:text-lg font-bold leading-none tracking-tight text-gray-900 dark:text-white flex items-center gap-2", className)}
+    className={cn("font-mono text-sm sm:text-base font-bold leading-none tracking-tight text-[var(--ink)] dark:text-[var(--ink-dark)] flex items-center gap-2", className)}
     {...props}
   />
 ));
@@ -34,7 +34,7 @@ CardTitle.displayName = "CardTitle";
 export const CardDescription = React.forwardRef(({ className, ...props }, ref) => (
   <p
     ref={ref}
-    className={cn("text-xs text-gray-500 dark:text-gray-400 mt-1", className)}
+    className={cn("font-mono text-[11px] text-[var(--ink)]/50 dark:text-[var(--ink-dark)]/50 mt-1", className)}
     {...props}
   />
 ));
@@ -48,7 +48,7 @@ CardContent.displayName = "CardContent";
 export const CardFooter = React.forwardRef(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={cn("flex items-center p-5 pt-0 border-t border-gray-100 dark:border-gray-800/80 mt-4", className)}
+    className={cn("flex items-center p-5 pt-0 border-t border-[var(--ink)]/10 dark:border-[var(--ink-dark)]/10 mt-4", className)}
     {...props}
   />
 ));

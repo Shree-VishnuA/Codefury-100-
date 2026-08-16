@@ -149,10 +149,10 @@ export function AdditionalForm({
   };
 
   return (
-    <Card className="shadow-sm">
+    <Card>
       <CardHeader className="pb-4">
         <CardTitle>
-          <FolderCheck className="w-5 h-5 text-indigo-600 dark:text-indigo-400" />
+          <FolderCheck className="w-4 h-4 text-[var(--redline)]" />
           Projects, Certifications & Honors
         </CardTitle>
         <CardDescription>
@@ -160,50 +160,50 @@ export function AdditionalForm({
         </CardDescription>
       </CardHeader>
 
-      <CardContent className="space-y-6 pt-2">
+      <CardContent className="space-y-6 pt-2 font-mono">
         <Tabs value={activeTab} onValueChange={setActiveTab}>
           <TabsList>
             <TabsTrigger value="projects" className="flex items-center gap-1.5 cursor-pointer">
-              <FolderCheck className="w-4 h-4" /> Projects ({projects.length})
+              <FolderCheck className="w-3.5 h-3.5" /> Projects ({projects.length})
             </TabsTrigger>
             <TabsTrigger value="certifications" className="flex items-center gap-1.5 cursor-pointer">
-              <Award className="w-4 h-4" /> Certifications ({certifications.length})
+              <Award className="w-3.5 h-3.5" /> Certifications ({certifications.length})
             </TabsTrigger>
             <TabsTrigger value="achievements" className="flex items-center gap-1.5 cursor-pointer">
-              <Trophy className="w-4 h-4" /> Achievements ({achievements.length})
+              <Trophy className="w-3.5 h-3.5" /> Achievements ({achievements.length})
             </TabsTrigger>
           </TabsList>
 
-          <TabsContent value="projects" className="space-y-4">
+          <TabsContent value="projects" className="space-y-4 pt-2">
             <div className="flex justify-end">
-              <Button onClick={addProject} size="sm" className="cursor-pointer">
-                <Plus className="w-4 h-4" /> Add Project
+              <Button onClick={addProject} size="sm">
+                <Plus className="w-3.5 h-3.5" /> Add Project
               </Button>
             </div>
 
             {projects.length === 0 ? (
-              <p className="text-xs text-gray-400 text-center py-6">No projects added yet.</p>
+              <p className="font-mono text-xs text-[var(--ink)]/40 text-center py-6">No projects added yet.</p>
             ) : (
               projects.map((proj, idx) => (
                 <div
                   key={proj.id}
-                  className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 space-y-3"
+                  className="p-4 border border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15 bg-[var(--paper)] dark:bg-[#161B22] space-y-4"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-gray-500">Project #{idx + 1}</span>
+                    <span className="font-mono text-xs font-bold text-[var(--redline)] uppercase tracking-wider">Project #{idx + 1}</span>
                     <Button
                       variant="ghost"
                       size="iconSm"
                       onClick={() => removeProject(proj.id)}
-                      className="text-red-500 hover:text-red-700 cursor-pointer"
+                      className="text-[var(--redline)] hover:bg-[var(--redline)] hover:text-white"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-3.5 h-3.5" />
                     </Button>
                   </div>
 
-                  <div className="grid grid-cols-1 gap-3">
+                  <div className="grid grid-cols-1 gap-3 font-sans">
                     <div>
-                      <Label className="mb-1 block">Project Name</Label>
+                      <Label className="mb-1 block font-mono text-xs font-semibold">Project Name</Label>
                       <Input
                         type="text"
                         value={proj.name}
@@ -214,9 +214,9 @@ export function AdditionalForm({
 
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                       <div>
-                        <Label className="mb-1 block">GitHub Link</Label>
+                        <Label className="mb-1 block font-mono text-xs font-semibold">GitHub Link</Label>
                         <div className="relative">
-                          <LinkIcon className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
+                          <LinkIcon className="w-4 h-4 text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 absolute left-3 top-2.5 z-10" />
                           <Input
                             type="text"
                             value={proj.githubLink || proj.gitHub || (proj.link && proj.link.toLowerCase().includes("github") ? proj.link : "")}
@@ -228,9 +228,9 @@ export function AdditionalForm({
                       </div>
 
                       <div>
-                        <Label className="mb-1 block">Live Link</Label>
+                        <Label className="mb-1 block font-mono text-xs font-semibold">Live Link</Label>
                         <div className="relative">
-                          <LinkIcon className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
+                          <LinkIcon className="w-4 h-4 text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 absolute left-3 top-2.5 z-10" />
                           <Input
                             type="text"
                             value={proj.liveLink || proj.url || proj.website || (proj.link && !proj.link.toLowerCase().includes("github") ? proj.link : "")}
@@ -244,10 +244,10 @@ export function AdditionalForm({
                   </div>
 
                   <div>
-                    <Label className="mb-1 block">Technologies Used (Press Enter or comma to add)</Label>
-                    <div className="flex gap-2">
+                    <Label className="mb-1 block font-mono text-xs font-semibold">Technologies Used (Press Enter or comma to add)</Label>
+                    <div className="flex gap-2 font-sans">
                       <div className="relative flex-1">
-                        <Code className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
+                        <Code className="w-4 h-4 text-[var(--ink)]/40 dark:text-[var(--ink-dark)]/40 absolute left-3 top-2.5 z-10" />
                         <Input
                           type="text"
                           value={techInputs[proj.id] || ""}
@@ -261,19 +261,18 @@ export function AdditionalForm({
                         type="button"
                         onClick={() => addTechTag(proj.id)}
                         size="sm"
-                        className="cursor-pointer"
                       >
-                        <Plus className="w-4 h-4" /> Add
+                        <Plus className="w-3.5 h-3.5" /> Add
                       </Button>
                     </div>
-                    <div className="flex flex-wrap gap-2 pt-2">
+                    <div className="flex flex-wrap gap-1.5 pt-2 font-mono">
                       {(proj.technologies || []).map((tech) => (
-                        <div key={tech} className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
+                        <div key={tech} className="inline-flex items-center gap-1.5 px-2.5 py-0.5 border border-[var(--ink)]/20 dark:border-[var(--ink-dark)]/20 bg-[var(--ink)]/5 dark:bg-[var(--ink-dark)]/5 font-mono text-xs text-[var(--ink)] dark:text-[var(--ink-dark)]">
                           {tech}
                           <button
                             type="button"
                             onClick={() => removeTechTag(proj.id, tech)}
-                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-200"
+                            className="text-[var(--redline)] hover:opacity-80"
                           >
                             <X className="w-3 h-3" />
                           </button>
@@ -283,39 +282,37 @@ export function AdditionalForm({
                   </div>
 
                   <div>
-                    <div className="flex items-center justify-between mb-1.5">
-                      <Label>Key Highlights / Bullet Points</Label>
-                      <Button
+                    <div className="flex items-center justify-between mb-1.5 font-mono">
+                      <Label className="font-mono text-xs font-semibold">Key Highlights / Bullet Points</Label>
+                      <button
                         type="button"
-                        variant="ghost"
-                        size="sm"
                         onClick={() => addProjectBullet(proj.id)}
-                        className="text-xs text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/50 cursor-pointer h-7 px-2"
+                        className="font-mono text-xs text-[var(--redline)] font-semibold hover:underline flex items-center gap-1 cursor-pointer"
                       >
-                        <Plus className="w-3.5 h-3.5 mr-1" /> Add Bullet
-                      </Button>
+                        <Plus className="w-3.5 h-3.5" /> Add Bullet
+                      </button>
                     </div>
 
-                    <div className="space-y-2">
+                    <div className="space-y-2 font-sans">
                       {(proj.bullets && proj.bullets.length > 0
                         ? proj.bullets
                         : [proj.description || ""]
                       ).map((bullet, bIdx) => (
                         <div key={bIdx} className="flex items-center gap-2">
-                          <span className="text-gray-400 text-sm font-bold">•</span>
+                          <span className="text-[var(--redline)] text-xs font-bold font-mono">•</span>
                           <Input
                             type="text"
                             value={bullet}
                             onChange={(e) => updateProjectBullet(proj.id, bIdx, e.target.value)}
                             placeholder="e.g. Architected responsive frontend processing 10k+ daily queries..."
-                            className="flex-1 text-sm"
+                            className="flex-1 text-xs sm:text-sm"
                           />
                           <Button
                             type="button"
                             variant="ghost"
                             size="iconSm"
                             onClick={() => removeProjectBullet(proj.id, bIdx)}
-                            className="text-gray-400 hover:text-red-500 cursor-pointer"
+                            className="text-[var(--ink)]/40 hover:text-[var(--redline)]"
                           >
                             <X className="w-3.5 h-3.5" />
                           </Button>
@@ -328,36 +325,36 @@ export function AdditionalForm({
             )}
           </TabsContent>
 
-          <TabsContent value="certifications" className="space-y-4">
+          <TabsContent value="certifications" className="space-y-4 pt-2">
             <div className="flex justify-end">
-              <Button onClick={addCertification} size="sm" className="cursor-pointer">
-                <Plus className="w-4 h-4" /> Add Certification
+              <Button onClick={addCertification} size="sm">
+                <Plus className="w-3.5 h-3.5" /> Add Certification
               </Button>
             </div>
 
             {certifications.length === 0 ? (
-              <p className="text-xs text-gray-400 text-center py-6">No certifications added yet.</p>
+              <p className="font-mono text-xs text-[var(--ink)]/40 text-center py-6">No certifications added yet.</p>
             ) : (
               certifications.map((cert, idx) => (
                 <div
                   key={cert.id}
-                  className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 space-y-3"
+                  className="p-4 border border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15 bg-[var(--paper)] dark:bg-[#161B22] space-y-3 font-mono"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-gray-500">Certification #{idx + 1}</span>
+                    <span className="font-mono text-xs font-bold text-[var(--redline)] uppercase tracking-wider">Certification #{idx + 1}</span>
                     <Button
                       variant="ghost"
                       size="iconSm"
                       onClick={() => removeCertification(cert.id)}
-                      className="text-red-500 hover:text-red-700 cursor-pointer"
+                      className="text-[var(--redline)] hover:bg-[var(--redline)] hover:text-white"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-3.5 h-3.5" />
                     </Button>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 font-sans">
                     <div>
-                      <Label className="mb-1 block">Certification Name</Label>
+                      <Label className="mb-1 block font-mono text-xs font-semibold">Certification Name</Label>
                       <Input
                         type="text"
                         value={cert.name}
@@ -367,7 +364,7 @@ export function AdditionalForm({
                     </div>
 
                     <div>
-                      <Label className="mb-1 block">Issuing Organization</Label>
+                      <Label className="mb-1 block font-mono text-xs font-semibold">Issuing Organization</Label>
                       <Input
                         type="text"
                         value={cert.issuer}
@@ -377,8 +374,8 @@ export function AdditionalForm({
                     </div>
 
                     <div>
-                      <Label className="mb-1 flex items-center gap-1">
-                        <CalendarIcon className="w-3.5 h-3.5 text-blue-500" /> Issue Date
+                      <Label className="mb-1 flex items-center gap-1 font-mono text-xs font-semibold">
+                        <CalendarIcon className="w-3.5 h-3.5 text-[var(--redline)]" /> Issue Date
                       </Label>
                       <DatePicker
                         value={cert.date || ""}
@@ -389,7 +386,7 @@ export function AdditionalForm({
                     </div>
 
                     <div>
-                      <Label className="mb-1 block">Credential URL</Label>
+                      <Label className="mb-1 block font-mono text-xs font-semibold">Credential URL</Label>
                       <Input
                         type="text"
                         value={cert.url || ""}
@@ -403,35 +400,35 @@ export function AdditionalForm({
             )}
           </TabsContent>
 
-          <TabsContent value="achievements" className="space-y-4">
+          <TabsContent value="achievements" className="space-y-4 pt-2">
             <div className="flex justify-end">
-              <Button onClick={addAchievement} size="sm" className="cursor-pointer">
-                <Plus className="w-4 h-4" /> Add Achievement
+              <Button onClick={addAchievement} size="sm">
+                <Plus className="w-3.5 h-3.5" /> Add Achievement
               </Button>
             </div>
 
             {achievements.length === 0 ? (
-              <p className="text-xs text-gray-400 text-center py-6">No achievements added yet.</p>
+              <p className="font-mono text-xs text-[var(--ink)]/40 text-center py-6">No achievements added yet.</p>
             ) : (
               achievements.map((ach, idx) => (
                 <div
                   key={ach.id}
-                  className="p-4 rounded-lg border border-gray-200 dark:border-gray-700 bg-gray-50/50 dark:bg-gray-900/50 space-y-3"
+                  className="p-4 border border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15 bg-[var(--paper)] dark:bg-[#161B22] space-y-3 font-mono"
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-xs font-bold text-gray-500">Achievement #{idx + 1}</span>
+                    <span className="font-mono text-xs font-bold text-[var(--redline)] uppercase tracking-wider">Achievement #{idx + 1}</span>
                     <Button
                       variant="ghost"
                       size="iconSm"
                       onClick={() => removeAchievement(ach.id)}
-                      className="text-red-500 hover:text-red-700 cursor-pointer"
+                      className="text-[var(--redline)] hover:bg-[var(--redline)] hover:text-white"
                     >
-                      <Trash2 className="w-4 h-4" />
+                      <Trash2 className="w-3.5 h-3.5" />
                     </Button>
                   </div>
 
-                  <div>
-                    <Label className="mb-1 block">Achievement Title</Label>
+                  <div className="font-sans">
+                    <Label className="mb-1 block font-mono text-xs font-semibold">Achievement Title</Label>
                     <Input
                       type="text"
                       value={ach.title}

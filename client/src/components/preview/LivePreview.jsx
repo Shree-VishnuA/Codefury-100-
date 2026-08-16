@@ -68,7 +68,7 @@ export function LivePreview({ data }) {
                     <span className="font-normal text-gray-600">| {exp.company}</span>
                   </span>
                   <span className="text-xs text-gray-500 font-medium font-sans">
-                    {exp.startDate} – {exp.isCurrent ? "Present" : exp.endDate || "Present"}
+                    {exp.startDate} - {exp.isCurrent ? "Present" : exp.endDate || "Present"}
                     {exp.location ? ` • ${exp.location}` : ""}
                   </span>
                 </div>
@@ -101,7 +101,7 @@ export function LivePreview({ data }) {
                 </div>
                 <div className="text-right">
                   <span className="text-xs text-gray-500 font-medium font-sans">
-                    {edu.startDate} – {edu.endDate}
+                    {edu.startDate} - {edu.endDate}
                   </span>
                   {edu.gpa && (
                     <div className="text-[11px] text-gray-500 font-medium font-sans">GPA: {edu.gpa}</div>
@@ -211,7 +211,8 @@ export function LivePreview({ data }) {
                   </ul>
                 )}
               </div>
-            ))}
+            );
+          })}
           </div>
         </div>
       )}
@@ -225,7 +226,7 @@ export function LivePreview({ data }) {
             {certifications.map((cert) => (
               <div key={cert.id} className="flex justify-between text-xs text-gray-700">
                 <span className="font-bold text-gray-900">
-                  {cert.name} <span className="font-normal text-gray-600">— {cert.issuer}</span>
+                  {cert.name} <span className="font-normal text-gray-600">- {cert.issuer}</span>
                 </span>
                 <span className="text-gray-500 font-medium font-sans">{cert.date}</span>
               </div>

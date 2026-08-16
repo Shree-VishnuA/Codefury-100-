@@ -67,9 +67,9 @@ export function AIReviewModal({
     <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()} className="max-w-2xl sm:max-w-2xl">
       <DialogClose onClick={onClose} />
       <DialogHeader>
-        <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-blue-600 to-indigo-600 flex items-center justify-center text-white shrink-0">
-            <Sparkles className="w-5 h-5" />
+        <div className="flex items-center gap-3 font-mono">
+          <div className="w-8 h-8 bg-[var(--ink)] dark:bg-[var(--ink-dark)] text-[var(--paper)] dark:text-[var(--paper-dark)] flex items-center justify-center shrink-0">
+            <Sparkles className="w-4 h-4 text-[var(--redline)]" />
           </div>
           <div>
             <DialogTitle>Review & Customize AI Optimizations</DialogTitle>
@@ -80,46 +80,46 @@ export function AIReviewModal({
         </div>
       </DialogHeader>
 
-      <div className="space-y-6 my-2">
+      <div className="space-y-6 my-2 font-mono">
         <div className="space-y-2">
           <div className="flex items-center justify-between">
-            <h4 className="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider flex items-center gap-1.5">
-              <Edit2 className="w-3.5 h-3.5 text-blue-500" /> Generated Professional Summary
+            <h4 className="text-xs font-bold text-[var(--ink)] dark:text-[var(--ink-dark)] uppercase tracking-wider flex items-center gap-1.5 font-mono">
+              <Edit2 className="w-3.5 h-3.5 text-[var(--redline)]" /> Generated Professional Summary
             </h4>
-            <span className="text-[11px] text-gray-400">Click to edit</span>
+            <span className="text-[10px] text-[var(--ink)]/40 font-mono">Click to edit</span>
           </div>
           <textarea
             rows={3}
             value={editableResult.summary || ""}
             onChange={(e) => handleSummaryChange(e.target.value)}
-            className="w-full p-3.5 text-xs sm:text-sm bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800 rounded-xl focus:ring-2 focus:ring-blue-500 focus:outline-none dark:text-white leading-relaxed"
+            className="w-full p-3 text-xs sm:text-sm bg-white dark:bg-[#161B22] border border-[var(--ink)]/20 dark:border-[var(--ink-dark)]/20 rounded-none focus:border-[var(--redline)] focus:outline-none text-[var(--ink)] dark:text-[var(--ink-dark)] leading-relaxed font-sans"
           />
         </div>
 
-        <div className="space-y-3 border-t border-gray-100 dark:border-gray-800 pt-4">
+        <div className="space-y-3 border-t border-[var(--ink)]/10 dark:border-[var(--ink-dark)]/10 pt-4">
           <div className="flex items-center justify-between">
-            <h4 className="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+            <h4 className="text-xs font-bold text-[var(--ink)] dark:text-[var(--ink-dark)] uppercase tracking-wider font-mono">
               Suggested Skill Tags ({editableResult.suggestedSkills.length})
             </h4>
-            <span className="text-[11px] text-gray-400">Click X to delete unwanted tags</span>
+            <span className="text-[10px] text-[var(--ink)]/40 font-mono">Click X to delete tags</span>
           </div>
 
-          <div className="flex flex-wrap gap-2 items-center">
+          <div className="flex flex-wrap gap-1.5 items-center font-mono">
             {editableResult.suggestedSkills.map((sk) => (
-              <Badge key={sk} variant="accent" className="gap-1 px-3 py-1 text-xs">
+              <Badge key={sk} variant="default" className="gap-1 px-2.5 py-1 text-xs">
                 <span>{sk}</span>
                 <button
                   type="button"
                   onClick={() => handleRemoveSkill(sk)}
-                  className="hover:text-red-600 dark:hover:text-red-400 p-0.5 rounded-full cursor-pointer"
+                  className="hover:text-[var(--redline)] cursor-pointer"
                   title={`Remove ${sk}`}
                 >
-                  <X className="w-3.5 h-3.5" />
+                  <X className="w-3 h-3" />
                 </button>
               </Badge>
             ))}
 
-            <div className="inline-flex items-center gap-1">
+            <div className="inline-flex items-center gap-1 font-sans">
               <Input
                 type="text"
                 value={newSkillInput}
@@ -132,8 +132,6 @@ export function AIReviewModal({
                 type="button"
                 size="iconSm"
                 onClick={handleAddSkill}
-                variant="accent"
-                className="cursor-pointer rounded-full"
                 title="Add Tag"
               >
                 <Plus className="w-3.5 h-3.5" />
@@ -143,23 +141,23 @@ export function AIReviewModal({
         </div>
 
         {editableResult.experience && editableResult.experience.length > 0 && (
-          <div className="space-y-3 border-t border-gray-100 dark:border-gray-800 pt-4">
-            <h4 className="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
+          <div className="space-y-3 border-t border-[var(--ink)]/10 dark:border-[var(--ink-dark)]/10 pt-4">
+            <h4 className="text-xs font-bold text-[var(--ink)] dark:text-[var(--ink-dark)] uppercase tracking-wider font-mono">
               Optimized Work Experience Bullets
             </h4>
-            <div className="space-y-4 max-h-72 overflow-y-auto pr-2">
+            <div className="space-y-3 max-h-72 overflow-y-auto pr-2">
               {editableResult.experience.map((exp, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50 space-y-2.5"
+                  className="p-3 border border-[var(--ink)]/15 dark:border-[var(--ink-dark)]/15 bg-[var(--paper)] dark:bg-[#161B22] space-y-2"
                 >
-                  <span className="text-xs font-bold text-blue-600 dark:text-blue-400 block">
-                    {exp.company} — {exp.role}
+                  <span className="font-mono text-xs font-bold text-[var(--redline)] block">
+                    {exp.company} - {exp.role}
                   </span>
-                  <div className="space-y-2">
+                  <div className="space-y-2 font-sans">
                     {exp.bullets.map((b, bIdx) => (
                       <div key={bIdx} className="flex items-center gap-2 w-full">
-                        <span className="text-gray-400 text-xs font-bold shrink-0">•</span>
+                        <span className="text-[var(--redline)] text-xs font-bold shrink-0 font-mono">•</span>
                         <Input
                           type="text"
                           value={b}
@@ -171,7 +169,7 @@ export function AIReviewModal({
                           variant="ghost"
                           size="iconSm"
                           onClick={() => handleRemoveBullet(idx, bIdx)}
-                          className="text-gray-400 hover:text-red-500 cursor-pointer shrink-0"
+                          className="text-[var(--ink)]/40 hover:text-[var(--redline)] shrink-0"
                           title="Delete bullet"
                         >
                           <Trash2 className="w-3.5 h-3.5" />
@@ -186,14 +184,14 @@ export function AIReviewModal({
         )}
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-gray-100 dark:border-gray-800 mt-4">
+      <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-4 border-t border-[var(--ink)]/10 dark:border-[var(--ink-dark)]/10 mt-4 font-mono">
         <Button
           type="button"
           variant="outline"
           onClick={onRegenerate}
-          className="w-full sm:w-auto cursor-pointer"
+          className="w-full sm:w-auto"
         >
-          <RefreshCw className="w-4 h-4" />
+          <RefreshCw className="w-3.5 h-3.5" />
           Regenerate AI
         </Button>
 
@@ -202,16 +200,16 @@ export function AIReviewModal({
             type="button"
             variant="ghost"
             onClick={onClose}
-            className="w-full sm:w-auto cursor-pointer"
+            className="w-full sm:w-auto"
           >
             Dismiss
           </Button>
           <Button
             type="button"
             onClick={() => onAccept(editableResult)}
-            className="w-full sm:w-auto bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 cursor-pointer"
+            className="w-full sm:w-auto"
           >
-            <Check className="w-4 h-4" />
+            <Check className="w-3.5 h-3.5" />
             Accept AI Optimizations
           </Button>
         </div>
