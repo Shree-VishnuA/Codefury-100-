@@ -1,130 +1,143 @@
-# GenForge — AI Resume Generator & ATS Optimizer
+# GenForge - Executive AI Resume Generator & ATS Optimizer
 
-> Transform raw career experience into executive, ATS-friendly resumes using Google Gemini AI. End-to-end PDF export, live preview, and strict anti-hallucination resume tailoring.
-
----
-
-## 🚀 Overview & Problem Statement
-
-Job seekers often struggle to translate their raw work experience into compelling, action-oriented resume bullet points that satisfy Applicant Tracking Systems (ATS). Existing tools either invent fake achievements (hallucination) or lock formatted PDF downloads behind paywalls.
-
-**GenForge** solves this problem by providing a fast, secure, local-first web application that utilizes Google Gemini API to structure, refine, and optimize resumes against specific target job descriptions while guaranteeing strict factual integrity.
+> Built for **CodeFury 9.0**. Transform raw career experience into executive, ATS-optimized single-column resumes using Google Gemini AI, featuring a minimal technical editorial design system, live preview, Google OAuth, MongoDB cloud persistence, and vector PDF exports.
 
 ---
 
-## ✨ Key Features
+## 📄 Overview & Key Capabilities
 
-- 📄 **6-Step Guided Resume Builder**: Personal info, Target job, Experience, Education, Skills, and Projects/Certifications.
-- 🤖 **Server-Side Gemini AI Engine (`/api/generate-resume`)**: Tailors summary and bullet points while keeping `GEMINI_API_KEY` secure.
-- 🛡️ **Anti-Hallucination Guardrails**: Strictly enhances verbs and grammar without inventing fake percentages, metrics, or technologies.
-- 🎯 **Real-time ATS Compatibility Analyzer**: Scores resume match out of 100, lists matched vs missing keywords, and recommends improvement tips.
-- 📄 **Client-Side PDF Generation (`@react-pdf/renderer`)**: Instant high-quality PDF downloads with crisp ATS single-column formatting.
-- 💾 **LocalStorage Autosave & Demo Mode**: Never lose progress on page refresh. "Try Sample Resume" button for instant testing.
-- 🌗 **Dark / Light UI Theme**: Sleek modern interface with responsive mobile editor and live preview views.
+**GenForge** is a full-stack web platform engineered to eliminate resume rejection by Applicant Tracking Systems (ATS). It translates raw project descriptions, job histories, and skill lists into high-impact, ATS-formatted resumes while guaranteeing strict factual integrity (zero hallucination).
+
+### Key Features
+- 🎨 **Minimal Editorial Design System**: Tailored theme using IBM Plex Mono & IBM Plex Sans, crisp monochrome borders, and high-contrast redline (`#B3402B`) accents.
+- ⚡ **Build from Scratch Mode**: Interactive 6-step guided wizard for Personal Info, Target Job, Experience, Education, Skills, and Projects/Honors.
+- 🚀 **Improve Existing Resume Mode**: Upload PDF, Word (`.docx`), or plain text (`.txt`) files for automated AI extraction, rewriting, and enhancement.
+- 🤖 **Google Gemini AI Optimization**: Server-side Gemini AI engine (`/api/generate-resume` & `/api/improve-resume`) for role-tailored summaries and bullet point rewrites.
+- 🎯 **Real-time ATS Compatibility Analyzer**: Match score out of 100 with matched vs missing skill keywords and actionable optimization suggestions.
+- 🔗 **Clickable Portfolio & Project Links**: Full support for both GitHub and Live demo links with clickable hyperlinking in PDF exports.
+- 🔒 **Google OAuth & User Authentication**: Seamless sign-in via Google Identity Services (GSI) with automatic user session synchronization.
+- 💾 **MongoDB Cloud Persistence & Local Fallback**: Auto-syncs resume data to MongoDB Atlas when logged in, with seamless localStorage fallback for offline editing.
+- 📄 **100% Client-Side PDF Generation**: Single-column ATS vector PDF download via `@react-pdf/renderer`.
 
 ---
 
 ## 🛠️ Technology Stack
 
-- **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS
-- **AI Integration**: Google Generative AI SDK (`@google/generative-ai`)
+### Frontend
+- **Framework**: React 18 + Vite
+- **Styling**: Vanilla CSS + Tailwind CSS (Custom Design Tokens)
+- **Typography**: IBM Plex Mono & IBM Plex Sans (Google Fonts)
+- **Icons**: Lucide React
 - **PDF Engine**: `@react-pdf/renderer`
-- **Icons**: `lucide-react`
-- **Effects**: `canvas-confetti`
+- **Animations**: Framer Motion & Canvas Confetti
+
+### Backend
+- **Runtime**: Node.js + Express (Module / ES imports)
+- **AI Integration**: Google Generative AI SDK (`@google/generative-ai`)
+- **Database**: MongoDB Atlas via Mongoose
+- **Authentication**: Google Auth Library (`google-auth-library`) & JWT Verification
+- **File Processing**: `multer` & `pdf-parse`
+
+### Deployment
+- **Platform**: Vercel (Serverless Functions for `/api/*` + Static Vite Bundle)
 
 ---
 
-## 📋 Prerequisites & Local Setup
+## 🚀 Quick Start & Local Setup
 
-1. **Clone or Download the Repository**
-2. **Install Dependencies**:
+### Prerequisites
+- Node.js 18+ and `npm` installed.
+- A Google Gemini API Key.
+- Optional: MongoDB Atlas URI.
+
+### Installation
+
+1. **Clone the Repository**:
+   ```bash
+   git clone https://github.com/Shree-VishnuA/Codefury-100-.git
+   cd Codefury-100-
+   ```
+
+2. **Install Root Dependencies**:
    ```bash
    npm install
    ```
 
-3. **Configure Environment Variables**:
-   Create a `.env` file from `.env.example`:
+3. **Install Client & Server Dependencies**:
    ```bash
-   cp .env.example .env
-   ```
-   Add your Google Gemini API Key:
-   ```env
-   GEMINI_API_KEY=your_actual_gemini_api_key_here
-   GEMINI_MODEL=gemini-1.5-flash
+   cd client && npm install
+   cd ../server && npm install
+   cd ..
    ```
 
-4. **Run Development Server**:
+4. **Configure Environment Variables**:
+   Create a `.env` file in the `server` directory:
+   ```env
+   PORT=5000
+   GEMINI_API_KEY=your_gemini_api_key_here
+   MONGODB_URI=your_mongodb_atlas_connection_string
+   GOOGLE_CLIENT_ID=your_google_oauth_client_id
+   ```
+
+5. **Start Development Servers**:
+   Run both frontend and backend concurrently from root:
    ```bash
    npm run dev
    ```
-   Open [http://localhost:3000](http://localhost:3000) in your browser.
+   - **Frontend**: http://localhost:5173
+   - **Backend API**: http://localhost:5000
 
 ---
 
 ## 🚢 Deploying to Vercel
 
-1. Push code to GitHub repository.
-2. Import project into Vercel Dashboard.
-3. In Project Settings -> Environment Variables, add:
+The project includes a pre-configured `vercel.json` and serverless API entrypoint (`api/index.js`).
+
+1. Push your changes to GitHub:
+   ```bash
+   git push origin main
+   ```
+2. Import your repository into [Vercel](https://vercel.com).
+3. In Vercel Project Settings -> **Environment Variables**, add:
    - `GEMINI_API_KEY`
-   - `GEMINI_MODEL`
-4. Click **Deploy**. Vercel will automatically build the Next.js App Router app.
+   - `MONGODB_URI`
+   - `GOOGLE_CLIENT_ID`
+4. Click **Deploy**. Vercel will automatically build the React Vite frontend and serverless Express API.
 
 ---
 
-## 📂 Project Structure
+## 📂 Repository Structure
 
 ```text
-app/
-  page.tsx                  # Main client workspace & state orchestrator
-  layout.tsx                # Root layout, fonts, metadata
-  globals.css               # Tailwind CSS base rules
-  api/
-    generate-resume/
-      route.ts              # Server-side Gemini API endpoint
-
-components/
-  ui/
-    Header.tsx              # Top bar, theme toggle, sample data, clear modal
-  form/
-    StepNavigation.tsx      # 6-step progress bar wizard
-    PersonalForm.tsx        # Step 1 contact details
-    TargetJobForm.tsx       # Step 2 target role & job description
-    ExperienceForm.tsx      # Step 3 dynamic experience list & bullets
-    EducationForm.tsx       # Step 4 academic degrees
-    SkillsForm.tsx          # Step 5 tag badge skills editor
-    AdditionalForm.tsx       # Step 6 projects, certs, achievements
-  ats/
-    ATSPanel.tsx            # ATS score wheel, matched/missing keywords
-  preview/
-    LivePreview.tsx         # Real-time single-column ATS resume preview
-    ResumePDFDocument.tsx   # React-PDF document definition
-    PDFExportButton.tsx     # Client-side PDF export button
-  ai/
-    AILoadingModal.tsx      # Animated AI processing phases
-    AIReviewModal.tsx       # Interactive AI diff & review modal
-
-lib/
-  gemini.ts                 # Server Gemini SDK & anti-hallucination prompts
-  resume-schema.ts          # Initial resume data schemas
-  sample-data.ts            # Fictional candidate dataset for demo mode
-  storage.ts                # LocalStorage persistence helpers
-  validation.ts             # Step form validation rules
-
-types/
-  resume.ts                 # TypeScript data contracts
-
-.env.example                # Template for environment variables
-README.md                   # Project documentation
-ARCHITECTURE.md             # Architecture overview & diagrams
+├── api/
+│   └── index.js              # Vercel serverless Express entrypoint
+├── client/                   # Vite + React Frontend
+│   ├── src/
+│   │   ├── components/
+│   │   │   ├── ai/           # AI Review & Loading Modals
+│   │   │   ├── ats/          # ATS Readiness Compatibility Panel
+│   │   │   ├── auth/         # Google OAuth & Email Sign-in Modal
+│   │   │   ├── form/         # Step-by-step form wizards (Personal, Experience, Projects...)
+│   │   │   ├── landing/      # Landing Page with Editorial Design System
+│   │   │   ├── preview/      # Live Preview & React-PDF Canvas Document
+│   │   │   ├── resume/       # Resume Improver & PDF Drag-and-Drop Uploader
+│   │   │   └── ui/           # Header, Sidebar, Card, Button, Input, Tabs primitives
+│   │   ├── lib/              # Resume schemas, sample data, and local storage helpers
+│   │   ├── App.jsx           # Main workspace application shell
+│   │   └── index.css         # Global styles, fonts, & CSS design tokens
+│   └── package.json
+├── server/                   # Express Node.js Backend
+│   ├── lib/                  # Gemini AI prompts & MongoDB connection manager
+│   ├── models/               # User & Resume Mongoose models
+│   ├── routes/               # Express API routes (AI, Auth, Resumes, Uploads)
+│   ├── index.js              # Express app server entrypoint
+│   └── package.json
+├── vercel.json               # Vercel monorepo deployment config
+└── package.json              # Root npm workspace script runner
 ```
 
 ---
 
-## 🔮 Future Improvements
+## 📜 License & Credits
 
-- Custom ATS resume templates (Modern, Minimal, Executive).
-- Multiple language resume generation.
-- One-click LinkedIn import integration.
+Built for **CodeFury 9.0**. Code released under the MIT License.
