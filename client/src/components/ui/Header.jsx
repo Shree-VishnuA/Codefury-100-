@@ -22,7 +22,7 @@ export function Header({
   const firstLetter = (user?.name || user?.email || "U").trim().charAt(0).toUpperCase();
 
   return (
-    <header className="sticky top-0 left-0 right-0 z-50 w-full border-b border-gray-200 dark:border-gray-800 bg-white/90 dark:bg-gray-950/90 backdrop-blur-md transition-colors m-0 p-0">
+    <header className="sticky top-0 left-0 right-0 z-50 w-full border-b border-slate-200 dark:border-white/10 bg-white/90 dark:bg-[#080b14]/90 backdrop-blur-xl transition-colors m-0 p-0">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between gap-4">
         {/* Brand Logo & View Switcher */}
         <div className="flex items-center gap-4 shrink-0">
@@ -45,14 +45,14 @@ export function Header({
           </button>
 
           {/* Nav Tabs */}
-          <nav className="hidden lg:flex items-center gap-1.5 ml-2 pl-4 border-l border-gray-200 dark:border-gray-800 text-xs font-semibold shrink-0">
+          <nav className="hidden lg:flex items-center gap-1.5 ml-2 pl-4 border-l border-slate-200 dark:border-gray-800 text-xs font-semibold shrink-0">
             <button
               type="button"
               onClick={() => setActiveView("landing")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
                 activeView === "landing"
-                  ? "bg-gray-100 dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-bold"
-                  : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                  ? "bg-slate-100 dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-bold"
+                  : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
               <Compass className="w-4 h-4 shrink-0" />
@@ -63,8 +63,8 @@ export function Header({
               onClick={() => setActiveView("builder")}
               className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg transition-colors cursor-pointer whitespace-nowrap shrink-0 ${
                 activeView === "builder"
-                  ? "bg-gray-100 dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-bold"
-                  : "text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white"
+                  ? "bg-slate-100 dark:bg-gray-800 text-blue-600 dark:text-blue-400 font-bold"
+                  : "text-slate-600 dark:text-gray-400 hover:text-slate-900 dark:hover:text-white"
               }`}
             >
               <LayoutDashboard className="w-4 h-4 shrink-0" />

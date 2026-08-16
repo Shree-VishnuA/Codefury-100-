@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { FolderCheck, Award, Trophy, Plus, Trash2, Link as LinkIcon, Code, Calendar as CalendarIcon } from "lucide-react";
+import { FolderCheck, Award, Trophy, Plus, Trash2, Link as LinkIcon, Code, Calendar as CalendarIcon, X } from "lucide-react";
 import { DatePicker } from "@/components/ui/date-picker";
 import { Button } from "@/components/ui/button";
 import { Card, CardHeader, CardTitle, CardDescription, CardContent } from "@/components/ui/card";
@@ -24,9 +24,11 @@ export function AdditionalForm({
         id: `proj-${Date.now()}`,
         name: "",
         description: "",
+        bullets: [""],
         technologies: [],
-        link: "",
-        achievements: [""],
+        techString: "",
+        githubLink: "",
+        liveLink: "",
       },
     ]);
   };
@@ -39,6 +41,68 @@ export function AdditionalForm({
     onUpdateProjects(
       projects.map((p) => (p.id === id ? { ...p, [field]: value } : p))
     );
+  };
+
+  const addProjectBullet = (projId) => {
+    onUpdateProjects(
+      projects.map((p) => {
+        if (p.id !== projId) return p;
+        const bullets = p.bullets && p.bullets.length > 0 ? p.bullets : (p.description ? [p.description] : [""]);
+        return { ...p, bullets: [...bullets, ""] };
+      })
+    );
+  };
+
+  const updateProjectBullet = (projId, bIndex, text) => {
+    onUpdateProjects(
+      projects.map((p) => {
+        if (p.id !== projId) return p;
+        const current = p.bullets && p.bullets.length > 0 ? p.bullets : (p.description ? [p.description] : [""]);
+        const bullets = [...current];
+        bullets[bIndex] = text;
+        return { ...p, bullets, description: bullets[0] || "" };
+      })
+    );
+  };
+
+  const removeProjectBullet = (projId, bIndex) => {
+    onUpdateProjects(
+      projects.map((p) => {
+        if (p.id !== projId) return p;
+        const current = p.bullets && p.bullets.length > 0 ? p.bullets : (p.description ? [p.description] : [""]);
+        const bullets = current.filter((_, idx) => idx !== bIndex);
+        const finalBullets = bullets.length ? bullets : [""];
+        return { ...p, bullets: finalBullets, description: finalBullets[0] || "" };
+      })
+    );
+  };
+
+  const [techInputs, setTechInputs] = useState({});
+
+  const addTechTag = (projId) => {
+    const value = techInputs[projId] || "";
+    const trimmed = value.trim();
+    if (!trimmed) return;
+    
+    const proj = projects.find(p => p.id === projId);
+    if (proj && !(proj.technologies || []).includes(trimmed)) {
+      updateProjectField(projId, "technologies", [...(proj.technologies || []), trimmed]);
+    }
+    setTechInputs({ ...techInputs, [projId]: "" });
+  };
+
+  const removeTechTag = (projId, tagToRemove) => {
+    const proj = projects.find(p => p.id === projId);
+    if (proj) {
+      updateProjectField(projId, "technologies", (proj.technologies || []).filter(t => t !== tagToRemove));
+    }
+  };
+
+  const handleTechKeyDown = (e, projId) => {
+    if (e.key === "Enter" || e.key === ",") {
+      e.preventDefault();
+      addTechTag(projId);
+    }
   };
 
   const addCertification = () => {
@@ -70,7 +134,6 @@ export function AdditionalForm({
       {
         id: `ach-${Date.now()}`,
         title: "",
-        description: "",
       },
     ]);
   };
@@ -138,7 +201,7 @@ export function AdditionalForm({
                     </Button>
                   </div>
 
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  <div className="grid grid-cols-1 gap-3">
                     <div>
                       <Label className="mb-1 block">Project Name</Label>
                       <Input
@@ -149,50 +212,116 @@ export function AdditionalForm({
                       />
                     </div>
 
-                    <div>
-                      <Label className="mb-1 block">Project / Repository Link</Label>
-                      <div className="relative">
-                        <LinkIcon className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
-                        <Input
-                          type="text"
-                          value={proj.link || ""}
-                          onChange={(e) => updateProjectField(proj.id, "link", e.target.value)}
-                          placeholder="https://github.com/user/project"
-                          className="pl-9"
-                        />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                      <div>
+                        <Label className="mb-1 block">GitHub Link</Label>
+                        <div className="relative">
+                          <LinkIcon className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
+                          <Input
+                            type="text"
+                            value={proj.githubLink || proj.gitHub || (proj.link && proj.link.toLowerCase().includes("github") ? proj.link : "")}
+                            onChange={(e) => updateProjectField(proj.id, "githubLink", e.target.value)}
+                            placeholder="https://github.com/user/project"
+                            className="pl-9"
+                          />
+                        </div>
+                      </div>
+
+                      <div>
+                        <Label className="mb-1 block">Live Link</Label>
+                        <div className="relative">
+                          <LinkIcon className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
+                          <Input
+                            type="text"
+                            value={proj.liveLink || proj.url || proj.website || (proj.link && !proj.link.toLowerCase().includes("github") ? proj.link : "")}
+                            onChange={(e) => updateProjectField(proj.id, "liveLink", e.target.value)}
+                            placeholder="https://project.com"
+                            className="pl-9"
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>
 
                   <div>
-                    <Label className="mb-1 block">Technologies Used (comma separated)</Label>
-                    <div className="relative">
-                      <Code className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
-                      <Input
-                        type="text"
-                        value={proj.technologies.join(", ")}
-                        onChange={(e) =>
-                          updateProjectField(
-                            proj.id,
-                            "technologies",
-                            e.target.value.split(",").map((s) => s.trim()).filter(Boolean)
-                          )
-                        }
-                        placeholder="Next.js, JavaScript, Gemini API"
-                        className="pl-9"
-                      />
+                    <Label className="mb-1 block">Technologies Used (Press Enter or comma to add)</Label>
+                    <div className="flex gap-2">
+                      <div className="relative flex-1">
+                        <Code className="w-4 h-4 text-gray-400 absolute left-3 top-2.5 z-10" />
+                        <Input
+                          type="text"
+                          value={techInputs[proj.id] || ""}
+                          onChange={(e) => setTechInputs({ ...techInputs, [proj.id]: e.target.value })}
+                          onKeyDown={(e) => handleTechKeyDown(e, proj.id)}
+                          placeholder="e.g. Next.js, JavaScript, Tailwind CSS"
+                          className="pl-9"
+                        />
+                      </div>
+                      <Button
+                        type="button"
+                        onClick={() => addTechTag(proj.id)}
+                        size="sm"
+                        className="cursor-pointer"
+                      >
+                        <Plus className="w-4 h-4" /> Add
+                      </Button>
+                    </div>
+                    <div className="flex flex-wrap gap-2 pt-2">
+                      {(proj.technologies || []).map((tech) => (
+                        <div key={tech} className="inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800 dark:bg-blue-900/50 dark:text-blue-300">
+                          {tech}
+                          <button
+                            type="button"
+                            onClick={() => removeTechTag(proj.id, tech)}
+                            className="text-blue-600 hover:text-blue-900 dark:text-blue-400 dark:hover:text-blue-200"
+                          >
+                            <X className="w-3 h-3" />
+                          </button>
+                        </div>
+                      ))}
                     </div>
                   </div>
 
                   <div>
-                    <Label className="mb-1 block">Description</Label>
-                    <textarea
-                      rows={2}
-                      value={proj.description}
-                      onChange={(e) => updateProjectField(proj.id, "description", e.target.value)}
-                      placeholder="Brief summary of the project architecture and impact..."
-                      className="w-full px-3 py-1.5 text-sm border rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                    />
+                    <div className="flex items-center justify-between mb-1.5">
+                      <Label>Key Highlights / Bullet Points</Label>
+                      <Button
+                        type="button"
+                        variant="ghost"
+                        size="sm"
+                        onClick={() => addProjectBullet(proj.id)}
+                        className="text-xs text-blue-600 dark:text-blue-400 hover:bg-blue-50 dark:hover:bg-blue-950/50 cursor-pointer h-7 px-2"
+                      >
+                        <Plus className="w-3.5 h-3.5 mr-1" /> Add Bullet
+                      </Button>
+                    </div>
+
+                    <div className="space-y-2">
+                      {(proj.bullets && proj.bullets.length > 0
+                        ? proj.bullets
+                        : [proj.description || ""]
+                      ).map((bullet, bIdx) => (
+                        <div key={bIdx} className="flex items-center gap-2">
+                          <span className="text-gray-400 text-sm font-bold">•</span>
+                          <Input
+                            type="text"
+                            value={bullet}
+                            onChange={(e) => updateProjectBullet(proj.id, bIdx, e.target.value)}
+                            placeholder="e.g. Architected responsive frontend processing 10k+ daily queries..."
+                            className="flex-1 text-sm"
+                          />
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="iconSm"
+                            onClick={() => removeProjectBullet(proj.id, bIdx)}
+                            className="text-gray-400 hover:text-red-500 cursor-pointer"
+                          >
+                            <X className="w-3.5 h-3.5" />
+                          </Button>
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 </div>
               ))
@@ -308,17 +437,6 @@ export function AdditionalForm({
                       value={ach.title}
                       onChange={(e) => updateAchField(ach.id, "title", e.target.value)}
                       placeholder="e.g. 1st Place - National AI Hackathon"
-                    />
-                  </div>
-
-                  <div>
-                    <Label className="mb-1 block">Description</Label>
-                    <textarea
-                      rows={2}
-                      value={ach.description}
-                      onChange={(e) => updateAchField(ach.id, "description", e.target.value)}
-                      placeholder="Awarded for creating an innovative LLM developer tool..."
-                      className="w-full px-3 py-1.5 text-sm border rounded-lg bg-white dark:bg-gray-800 dark:border-gray-700 dark:text-white focus:ring-2 focus:ring-blue-500 focus:outline-none"
                     />
                   </div>
                 </div>

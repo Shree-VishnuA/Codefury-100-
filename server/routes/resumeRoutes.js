@@ -8,16 +8,23 @@ const router = express.Router();
 // Generate & Optimize Resume with Gemini AI
 router.post("/generate-resume", async (req, res) => {
   try {
-    const body = req.body;
-    if (!body || !body.personal || !body.targetJob) {
-      return res.status(400).json({ success: false, error: "Invalid resume payload format" });
-    }
+    const body = req.body || {};
+    const safePayload = {
+      ...body,
+      personal: {
+        fullName: body.personal?.fullName || "Candidate",
+        email: body.personal?.email || "candidate@example.com",
+        summary: body.personal?.summary || "",
+        ...body.personal,
+      },
+      targetJob: {
+        targetRole: body.targetJob?.targetRole || "Software Professional",
+        industry: body.targetJob?.industry || "Technology",
+        ...body.targetJob,
+      },
+    };
 
-    if (!body.personal.fullName || !body.personal.email) {
-      return res.status(400).json({ success: false, error: "Name and email are required" });
-    }
-
-    const aiResult = await processResumeWithGemini(body);
+    const aiResult = await processResumeWithGemini(safePayload);
     return res.json({ success: true, data: aiResult });
   } catch (error) {
     console.error("API /api/generate-resume Error:", error);

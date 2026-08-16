@@ -2,20 +2,29 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Light mode defaults */
 html, body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
   width: 100%;
   overflow-x: hidden;
-  background-color: var(--color-gray-50);
-  color: var(--color-gray-900);
+  background-color: #f1f5f9;
+  color: #0f172a;
   font-family: 'Inter', system-ui, -apple-system, sans-serif;
 }
 
-.dark html, .dark body {
-  background-color: var(--color-gray-950);
-  color: var(--color-gray-100);
+/* Dark mode overrides */
+.dark html,
+.dark body,
+html.dark,
+body.dark {
+  background-color: #080b14;
+  color: #f8fafc;
+}
+
+.dark body {
+  background-image: radial-gradient(circle at 15% 10%, rgba(59, 130, 246, 0.12), transparent 28rem), radial-gradient(circle at 85% 5%, rgba(139, 92, 246, 0.1), transparent 24rem);
 }
 
 /* Ensure hover cursor pointer for all buttons, clickable elements, and form controls */
@@ -40,7 +49,7 @@ select,
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background-color: #d1d5db;
+  background-color: #cbd5e1;
   border-radius: 9999px;
 }
 .dark ::-webkit-scrollbar-thumb {

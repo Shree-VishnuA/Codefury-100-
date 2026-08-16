@@ -5,6 +5,7 @@ import path from "path";
 import { fileURLToPath } from "url";
 import resumeRoutes from "./routes/resumeRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
+import uploadRoutes from "./routes/uploadRoutes.js";
 import { connectToDatabase } from "./lib/mongodb.js";
 
 dotenv.config();
@@ -25,6 +26,7 @@ connectToDatabase();
 // API Routes
 app.use("/api", resumeRoutes);
 app.use("/api", authRoutes);
+app.use("/api", uploadRoutes);
 
 // Health check endpoint
 app.get("/api/health", (req, res) => {

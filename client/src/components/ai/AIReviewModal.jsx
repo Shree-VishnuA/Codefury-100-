@@ -64,7 +64,7 @@ export function AIReviewModal({
   };
 
   return (
-    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()}>
+    <Dialog open={isOpen} onOpenChange={(open) => !open && onClose()} className="max-w-2xl sm:max-w-2xl">
       <DialogClose onClick={onClose} />
       <DialogHeader>
         <div className="flex items-center gap-3">
@@ -126,7 +126,7 @@ export function AIReviewModal({
                 onChange={(e) => setNewSkillInput(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleAddSkill()}
                 placeholder="Add custom tag..."
-                className="h-7 text-xs w-28 px-2"
+                className="h-7 text-xs w-32 px-2"
               />
               <Button
                 type="button"
@@ -147,31 +147,31 @@ export function AIReviewModal({
             <h4 className="text-xs font-bold text-gray-700 dark:text-gray-300 uppercase tracking-wider">
               Optimized Work Experience Bullets
             </h4>
-            <div className="space-y-4 max-h-56 overflow-y-auto pr-2">
+            <div className="space-y-4 max-h-72 overflow-y-auto pr-2">
               {editableResult.experience.map((exp, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50 space-y-2"
+                  className="p-4 rounded-xl border border-gray-200 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-900/50 space-y-2.5"
                 >
                   <span className="text-xs font-bold text-blue-600 dark:text-blue-400 block">
                     {exp.company} — {exp.role}
                   </span>
                   <div className="space-y-2">
                     {exp.bullets.map((b, bIdx) => (
-                      <div key={bIdx} className="flex items-center gap-2">
-                        <span className="text-gray-400 text-xs font-bold">•</span>
+                      <div key={bIdx} className="flex items-center gap-2 w-full">
+                        <span className="text-gray-400 text-xs font-bold shrink-0">•</span>
                         <Input
                           type="text"
                           value={b}
                           onChange={(e) => handleUpdateBullet(idx, bIdx, e.target.value)}
-                          className="flex-1 text-xs"
+                          className="flex-1 text-xs w-full"
                         />
                         <Button
                           type="button"
                           variant="ghost"
                           size="iconSm"
                           onClick={() => handleRemoveBullet(idx, bIdx)}
-                          className="text-gray-400 hover:text-red-500 cursor-pointer"
+                          className="text-gray-400 hover:text-red-500 cursor-pointer shrink-0"
                           title="Delete bullet"
                         >
                           <Trash2 className="w-3.5 h-3.5" />

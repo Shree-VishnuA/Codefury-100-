@@ -17,8 +17,10 @@ export const initialResumeData = {
   experience: [],
   education: [],
   skills: {
-    technical: [],
-    soft: [],
+    languages: [],
+    dsa: [],
+    frontend: [],
+    backend: [],
     tools: [],
   },
   projects: [],

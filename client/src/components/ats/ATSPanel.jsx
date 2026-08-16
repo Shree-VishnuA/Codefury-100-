@@ -7,7 +7,7 @@ import { Badge } from "@/components/ui/badge";
 export function ATSPanel({ analysis, onTriggerAI, isGeneratingAI }) {
   if (!analysis) {
     return (
-      <Card className="shadow-sm">
+      <Card className="border-slate-200 dark:border-white/10 bg-white dark:bg-white/[0.04] shadow-md dark:shadow-2xl dark:shadow-black/10 backdrop-blur-sm">
         <CardHeader className="pb-3">
           <div className="flex items-center justify-between">
             <CardTitle>
@@ -41,7 +41,7 @@ export function ATSPanel({ analysis, onTriggerAI, isGeneratingAI }) {
   };
 
   return (
-    <Card className="shadow-sm">
+    <Card className="border-slate-200 dark:border-white/10 bg-white dark:bg-white/[0.04] shadow-md dark:shadow-2xl dark:shadow-black/10 backdrop-blur-sm">
       <CardHeader className="pb-4 border-b border-gray-100 dark:border-gray-800">
         <div className="flex items-center justify-between">
           <div>

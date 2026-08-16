@@ -14,7 +14,7 @@ export function StepNavigation({ currentStep, setCurrentStep }) {
   const progressPercent = Math.round(((currentStep - 1) / (STEPS.length - 1)) * 100);
 
   return (
-    <div className="w-full bg-white dark:bg-gray-800 rounded-xl p-4 border border-gray-200 dark:border-gray-700 shadow-sm mb-6">
+    <div className="w-full rounded-2xl bg-white dark:bg-white/[0.04] p-4 border border-slate-200 dark:border-white/10 shadow-md dark:shadow-2xl dark:shadow-black/10 mb-6 backdrop-blur-sm">
       <div className="flex items-center justify-between mb-2">
         <span className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
           Step {currentStep} of {STEPS.length}: {STEPS[currentStep - 1].label}
