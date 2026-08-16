@@ -203,7 +203,12 @@ export async function processResumeWithGemini(data) {
     const response = await result.response;
 
     let rawText = response.text() || "";
-    rawText = rawText.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/\s*```$/, "").trim();
+    const jsonMatch = rawText.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      rawText = jsonMatch[0];
+    } else {
+      rawText = rawText.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/\s*```$/, "").trim();
+    }
 
     const parsed = JSON.parse(rawText);
 

@@ -3,24 +3,24 @@ import { Document, Page, Text, View, StyleSheet, Link } from "@react-pdf/rendere
 
 const styles = StyleSheet.create({
   page: {
-    paddingTop: 42,
-    paddingBottom: 42,
-    paddingHorizontal: 44,
+    paddingTop: 32,
+    paddingBottom: 32,
+    paddingHorizontal: 36,
     fontFamily: "Times-Roman",
-    fontSize: 10,
-    lineHeight: 1.45,
+    fontSize: 9.5,
+    lineHeight: 1.35,
     color: "#111827",
   },
   header: {
     textAlign: "center",
-    marginBottom: 16,
+    marginBottom: 10,
   },
   name: {
-    fontSize: 30,
+    fontSize: 28,
     fontFamily: "Times-Roman",
     textTransform: "uppercase",
-    letterSpacing: 3,
-    marginBottom: 8,
+    letterSpacing: 2,
+    marginBottom: 10,
     color: "#111827",
   },
   contactRow: {
@@ -28,375 +28,188 @@ const styles = StyleSheet.create({
     flexWrap: "wrap",
     justifyContent: "center",
     alignItems: "center",
-    fontSize: 9.5,
+    fontSize: 9,
     fontFamily: "Helvetica",
     color: "#374151",
   },
   pipe: {
     color: "#9CA3AF",
-    marginHorizontal: 5,
-    fontSize: 9.5,
+    marginHorizontal: 4,
+    fontSize: 9,
   },
-
-  // --- Section heading: big first letter + small caps rest, underlined ---
-  sectionHeadingRow: {
-    flexDirection: "row",
-    alignItems: "baseline",
-    width: "100%",
-    borderBottomWidth: 0.9,
-    borderBottomColor: "#111827",
-    paddingBottom: 2.5,
-    marginBottom: 7,
-  },
-  sectionHeadingFirst: {
-    fontSize: 13,
-    fontFamily: "Times-Bold",
-    color: "#111827",
-  },
-  sectionHeadingRest: {
-    fontSize: 10,
-    fontFamily: "Times-Bold",
-    letterSpacing: 0.5,
-    color: "#111827",
-  },
-
   section: {
-    marginBottom: 14,
+    marginBottom: 9,
+  },
+  sectionTitle: {
+    fontSize: 10.5,
+    fontFamily: "Times-Bold",
+    textTransform: "uppercase",
+    borderBottomWidth: 0.8,
+    borderBottomColor: "#111827",
+    paddingBottom: 1.5,
+    marginBottom: 4,
+    color: "#111827",
   },
   summaryText: {
-    fontSize: 9.8,
+    fontSize: 9,
     color: "#374151",
-    lineHeight: 1.45,
+    lineHeight: 1.35,
   },
-
-  // --- Skills ---
-  skillLine: {
+  itemHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "baseline",
+    marginBottom: 1.5,
+  },
+  itemTitle: {
     fontSize: 9.5,
+    fontFamily: "Times-Bold",
+    color: "#111827",
+  },
+  itemSubtitle: {
+    fontSize: 9,
+    fontFamily: "Times-Roman",
+    color: "#4B5563",
+  },
+  itemDate: {
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
+    color: "#6B7280",
+  },
+  bulletList: {
+    marginTop: 1,
+    paddingLeft: 6,
+  },
+  bulletItem: {
+    fontSize: 8.5,
     color: "#374151",
-    marginBottom: 3,
-    lineHeight: 1.4,
+    marginBottom: 1.5,
+    lineHeight: 1.35,
+  },
+  skillRow: {
+    fontSize: 8.5,
+    marginBottom: 2,
   },
   boldLabel: {
     fontFamily: "Times-Bold",
     color: "#111827",
   },
-
-  // --- Education: left block (institution/degree/gpa) + right block (location/dates) ---
-  eduRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    marginBottom: 8,
-  },
-  eduLeft: {
-    flexShrink: 1,
-    paddingRight: 12,
-  },
-  eduRight: {
-    alignItems: "flex-end",
-    justifyContent: "center",
-  },
-  eduInstitution: {
-    fontSize: 10.5,
-    fontFamily: "Times-Bold",
-    color: "#111827",
-  },
-  eduDegree: {
-    fontSize: 9.8,
-    fontFamily: "Times-Roman",
-    color: "#374151",
-    marginTop: 1,
-  },
-  eduGpa: {
-    fontSize: 9.5,
-    fontFamily: "Times-Bold",
-    color: "#111827",
-    marginTop: 2,
-  },
-  eduLocation: {
-    fontSize: 9,
-    fontFamily: "Helvetica",
-    color: "#4B5563",
-  },
-  eduDates: {
-    fontSize: 9,
-    fontFamily: "Helvetica",
-    color: "#4B5563",
-    marginTop: 2,
-  },
-
-  // --- Work Experience ---
-  itemHeader: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "baseline",
-    marginBottom: 2,
-  },
-  itemTitle: {
-    fontSize: 10,
-    fontFamily: "Times-Bold",
-    color: "#111827",
-  },
-  itemSubtitle: {
-    fontSize: 9.6,
-    fontFamily: "Times-Roman",
-    color: "#4B5563",
-  },
-  itemDate: {
-    fontSize: 8.8,
-    fontFamily: "Helvetica",
-    color: "#6B7280",
-  },
-  bulletList: {
-    marginTop: 2,
-    paddingLeft: 8,
-  },
-  bulletItem: {
-    fontSize: 9.2,
-    color: "#374151",
-    marginBottom: 2.5,
-    lineHeight: 1.4,
-  },
-
-  // --- Projects ---
-  projectBlock: {
-    marginBottom: 9,
-  },
-  projectTitle: {
-    fontSize: 10.2,
-    fontFamily: "Times-Bold",
-    color: "#111827",
-  },
-  projectLinks: {
-    flexDirection: "row",
-    gap: 5,
-    alignItems: "center",
-  },
-  projectLink: {
-    fontSize: 8.8,
-    fontFamily: "Helvetica",
-    textTransform: "uppercase",
-    letterSpacing: 0.4,
+  link: {
     color: "#1D4ED8",
-    textDecoration: "underline",
+    textDecoration: "none",
+    fontSize: 8.5,
+    fontFamily: "Helvetica",
   },
-  linkDivider: {
-    fontSize: 8,
-    color: "#9CA3AF",
-  },
-  techStack: {
-    fontSize: 8.6,
-    fontFamily: "Helvetica-Oblique",
-    color: "#6B7280",
-    marginTop: 1.5,
-    marginBottom: 2,
-  },
-
-  // --- Certifications / Achievements ---
-  achievementItem: {
-    fontSize: 9.2,
-    color: "#374151",
-    marginBottom: 3,
-    lineHeight: 1.4,
+  contactLink: {
+    color: "#1D4ED8",
+    textDecoration: "none",
+    fontSize: 9,
+    fontFamily: "Helvetica",
   },
 });
 
-function SectionHeading({ children }) {
-  const label = String(children);
-  const first = label.charAt(0).toUpperCase();
-  const rest = label.slice(1).toUpperCase();
-  return (
-    <View style={styles.sectionHeadingRow}>
-      <Text style={styles.sectionHeadingFirst}>{first}</Text>
-      <Text style={styles.sectionHeadingRest}>{rest}</Text>
-    </View>
-  );
-}
-
-function toUrl(value) {
-  if (!value) return null;
-  return value.startsWith("http") ? value : `https://${value}`;
-}
-
 export function ResumePDFDocument({ data }) {
-  const {
-    personal = {},
-    experience = [],
-    education = [],
-    skills = { languages: [], dsa: [], frontend: [], backend: [], tools: [] },
-    projects = [],
-    certifications = [],
-    achievements = [],
-  } = data;
-
+  const { personal = {}, experience = [], education = [], skills = { technical: [], soft: [], tools: [] }, projects = [], certifications = [], achievements = [] } = data;
   const hasSkills =
-    (skills.languages || []).length > 0 ||
-    (skills.dsa || []).length > 0 ||
-    (skills.frontend || []).length > 0 ||
-    (skills.backend || []).length > 0 ||
-    (skills.tools || []).length > 0;
+    (skills.languages || []).length > 0 || (skills.dsa || []).length > 0 || (skills.frontend || []).length > 0 || (skills.backend || []).length > 0 || (skills.tools || []).length > 0;
 
   return (
-    <Document title={`${personal.fullName || "Resume"}.pdf`}>
-      <Page size="A4" style={styles.page} wrap>
-        {/* Header */}
+    <Document title={`${personal.fullName || "Resume"} - Legible.pdf`}>
+      <Page size="A4" style={styles.page}>
         <View style={styles.header}>
           <Text style={styles.name}>{personal.fullName || "Your Full Name"}</Text>
           <View style={styles.contactRow}>
-            {personal.linkedIn && (
-              <Link src={toUrl(personal.linkedIn)} style={{ color: "#1D4ED8", fontSize: 9.5, fontFamily: "Helvetica" }}>
-                LinkedIn
-              </Link>
-            )}
-            {personal.linkedIn && (personal.gitHub || personal.website || personal.email || personal.phone) && (
-              <Text style={styles.pipe}>|</Text>
-            )}
+            {personal.linkedIn ? (
+              <Link src={personal.linkedIn.startsWith('http') ? personal.linkedIn : `https://${personal.linkedIn}`} style={styles.contactLink}>LinkedIn</Link>
+            ) : null}
+            {personal.linkedIn && (personal.gitHub || personal.website || personal.email || personal.phone) ? <Text style={styles.pipe}>|</Text> : null}
 
-            {personal.gitHub && (
-              <Link src={toUrl(personal.gitHub)} style={{ color: "#1D4ED8", fontSize: 9.5, fontFamily: "Helvetica" }}>
-                GitHub
-              </Link>
-            )}
-            {personal.gitHub && (personal.website || personal.email || personal.phone) && (
-              <Text style={styles.pipe}>|</Text>
-            )}
+            {personal.gitHub ? (
+              <Link src={personal.gitHub.startsWith('http') ? personal.gitHub : `https://${personal.gitHub}`} style={styles.contactLink}>GitHub</Link>
+            ) : null}
+            {personal.gitHub && (personal.website || personal.email || personal.phone) ? <Text style={styles.pipe}>|</Text> : null}
 
-            {personal.website && (
-              <Link src={toUrl(personal.website)} style={{ color: "#1D4ED8", fontSize: 9.5, fontFamily: "Helvetica" }}>
-                Portfolio
-              </Link>
-            )}
-            {personal.website && (personal.email || personal.phone) && <Text style={styles.pipe}>|</Text>}
+            {personal.website ? (
+              <Link src={personal.website.startsWith('http') ? personal.website : `https://${personal.website}`} style={styles.contactLink}>Portfolio</Link>
+            ) : null}
+            {personal.website && (personal.email || personal.phone) ? <Text style={styles.pipe}>|</Text> : null}
 
-            {personal.email && (
-              <Link src={`mailto:${personal.email}`} style={{ color: "#1D4ED8", fontSize: 9.5, fontFamily: "Helvetica" }}>
-                {personal.email}
-              </Link>
-            )}
-            {personal.email && personal.phone && <Text style={styles.pipe}>|</Text>}
+            {personal.email ? (
+              <Link src={`mailto:${personal.email}`} style={styles.contactLink}>{personal.email}</Link>
+            ) : null}
+            {personal.email && personal.phone ? <Text style={styles.pipe}>|</Text> : null}
 
-            {personal.phone && <Text style={{ fontSize: 9.5, color: "#374151" }}>{personal.phone}</Text>}
+            {personal.phone ? <Text style={{ fontSize: 9, color: "#374151" }}>{personal.phone}</Text> : null}
           </View>
         </View>
 
-        {/* Professional Summary */}
-        {personal.summary && (
+        {personal.summary ? (
           <View style={styles.section}>
-            <SectionHeading>Professional Summary</SectionHeading>
+            <Text style={styles.sectionTitle}>Professional Summary</Text>
             <Text style={styles.summaryText}>{personal.summary}</Text>
           </View>
-        )}
+        ) : null}
 
-        {/* Skills */}
-        {hasSkills && (
+        {hasSkills ? (
           <View style={styles.section}>
-            <SectionHeading>Skills</SectionHeading>
-            {(skills.languages || []).length > 0 && (
-              <Text style={styles.skillLine}>
-                <Text style={styles.boldLabel}>Languages: </Text>
-                {skills.languages.join(", ")}
-              </Text>
-            )}
-            {(skills.dsa || []).length > 0 && (
-              <Text style={styles.skillLine}>
-                <Text style={styles.boldLabel}>Data Structures & Algorithms: </Text>
-                {skills.dsa.join(", ")}
-              </Text>
-            )}
-            {(skills.frontend || []).length > 0 && (
-              <Text style={styles.skillLine}>
-                <Text style={styles.boldLabel}>Frontend: </Text>
-                {skills.frontend.join(", ")}
-              </Text>
-            )}
-            {(skills.backend || []).length > 0 && (
-              <Text style={styles.skillLine}>
-                <Text style={styles.boldLabel}>Backend: </Text>
-                {skills.backend.join(", ")}
-              </Text>
-            )}
-            {(skills.tools || []).length > 0 && (
-              <Text style={styles.skillLine}>
-                <Text style={styles.boldLabel}>Tools: </Text>
-                {skills.tools.join(", ")}
-              </Text>
-            )}
+            <Text style={styles.sectionTitle}>Skills</Text>
+            <View style={styles.bulletList}>
+              {(skills.languages || []).length > 0 ? (
+                <Text style={styles.bulletItem}>
+                  • <Text style={styles.boldLabel}>Languages: </Text>{skills.languages.join(", ")}
+                </Text>
+              ) : null}
+              {(skills.dsa || []).length > 0 ? (
+                <Text style={styles.bulletItem}>
+                  • <Text style={styles.boldLabel}>Data Structures & Algorithms: </Text>{skills.dsa.join(", ")}
+                </Text>
+              ) : null}
+              {(skills.frontend || []).length > 0 ? (
+                <Text style={styles.bulletItem}>
+                  • <Text style={styles.boldLabel}>Frontend: </Text>{skills.frontend.join(", ")}
+                </Text>
+              ) : null}
+              {(skills.backend || []).length > 0 ? (
+                <Text style={styles.bulletItem}>
+                  • <Text style={styles.boldLabel}>Backend: </Text>{skills.backend.join(", ")}
+                </Text>
+              ) : null}
+              {(skills.tools || []).length > 0 ? (
+                <Text style={styles.bulletItem}>
+                  • <Text style={styles.boldLabel}>Tools: </Text>{skills.tools.join(", ")}
+                </Text>
+              ) : null}
+            </View>
           </View>
-        )}
+        ) : null}
 
-        {/* Education */}
-        {education.length > 0 && (
+        {education.length > 0 ? (
           <View style={styles.section}>
-            <SectionHeading>Education</SectionHeading>
+            <Text style={styles.sectionTitle}>Education</Text>
             {education.map((edu) => (
-              <View key={edu.id} style={styles.eduRow}>
-                <View style={styles.eduLeft}>
-                  <Text style={styles.eduInstitution}>{edu.institution}</Text>
-                  <Text style={styles.eduDegree}>
-                    {edu.degree}
-                    {edu.fieldOfStudy ? ` in ${edu.fieldOfStudy}` : ""}
+              <View key={edu.id} style={styles.itemHeader}>
+                <View>
+                  <Text style={styles.itemTitle}>
+                    {edu.degree} {edu.fieldOfStudy ? `in ${edu.fieldOfStudy}` : ""}
                   </Text>
-                  {edu.gpa ? <Text style={styles.eduGpa}>{edu.gpa}</Text> : null}
+                  <Text style={styles.itemSubtitle}>{edu.institution}</Text>
                 </View>
-                <View style={styles.eduRight}>
-                  {edu.location ? <Text style={styles.eduLocation}>{edu.location}</Text> : null}
-                  <Text style={styles.eduDates}>
+                <View style={{ alignItems: "flex-end" }}>
+                  <Text style={styles.itemDate}>
                     {edu.startDate} - {edu.endDate}
                   </Text>
+                  {edu.gpa ? <Text style={styles.itemDate}>GPA: {edu.gpa}</Text> : null}
                 </View>
               </View>
             ))}
           </View>
-        )}
+        ) : null}
 
-        {/* Projects */}
-        {projects.length > 0 && (
+        {experience.length > 0 ? (
           <View style={styles.section}>
-            <SectionHeading>Projects</SectionHeading>
-            {projects.map((proj) => {
-              const githubUrl =
-                proj.githubLink || proj.gitHub || (proj.link && proj.link.toLowerCase().includes("github") ? proj.link : null);
-              const liveUrl =
-                proj.liveLink || proj.url || proj.website || (proj.link && !proj.link.toLowerCase().includes("github") ? proj.link : null);
-
-              return (
-                <View key={proj.id} style={styles.projectBlock}>
-                  <View style={styles.itemHeader}>
-                    <Text style={styles.projectTitle}>{proj.name}</Text>
-                    <View style={styles.projectLinks}>
-                      {githubUrl && <Link src={toUrl(githubUrl)} style={styles.projectLink}>GitHub</Link>}
-                      {githubUrl && liveUrl && <Text style={styles.linkDivider}>|</Text>}
-                      {liveUrl && <Link src={toUrl(liveUrl)} style={styles.projectLink}>Live</Link>}
-                    </View>
-                  </View>
-
-                  {(proj.technologies || []).length > 0 && (
-                    <Text style={styles.techStack}>{proj.technologies.join(" · ")}</Text>
-                  )}
-
-                  {((proj.bullets && proj.bullets.length > 0) || proj.description) && (
-                    <View style={styles.bulletList}>
-                      {(proj.bullets && proj.bullets.length > 0 ? proj.bullets : [proj.description]).map(
-                        (b, bIdx) =>
-                          b ? (
-                            <Text key={bIdx} style={styles.bulletItem}>
-                              • {b}
-                            </Text>
-                          ) : null
-                      )}
-                    </View>
-                  )}
-                </View>
-              );
-            })}
-          </View>
-        )}
-
-        {/* Work Experience */}
-        {experience.length > 0 && (
-          <View style={styles.section}>
-            <SectionHeading>Work Experience</SectionHeading>
+            <Text style={styles.sectionTitle}>Work Experience</Text>
             {experience.map((exp) => (
-              <View key={exp.id} style={{ marginBottom: 10 }}>
+              <View key={exp.id} style={{ marginBottom: 8 }}>
                 <View style={styles.itemHeader}>
                   <Text style={styles.itemTitle}>
                     {exp.position} <Text style={styles.itemSubtitle}>| {exp.company}</Text>
@@ -406,7 +219,7 @@ export function ResumePDFDocument({ data }) {
                     {exp.location ? ` • ${exp.location}` : ""}
                   </Text>
                 </View>
-                {(exp.bullets || []).length > 0 && (
+                {(exp.bullets || []).length > 0 ? (
                   <View style={styles.bulletList}>
                     {exp.bullets.map((b, idx) => (
                       <Text key={idx} style={styles.bulletItem}>
@@ -414,16 +227,61 @@ export function ResumePDFDocument({ data }) {
                       </Text>
                     ))}
                   </View>
-                )}
+                ) : null}
               </View>
             ))}
           </View>
-        )}
+        ) : null}
 
-        {/* Certifications */}
-        {certifications.length > 0 && (
+        {projects.length > 0 ? (
           <View style={styles.section}>
-            <SectionHeading>Certifications</SectionHeading>
+            <Text style={styles.sectionTitle}>Projects</Text>
+            {projects.map((proj) => {
+              const githubUrl = proj.githubLink || proj.gitHub || (proj.link && proj.link.toLowerCase().includes("github") ? proj.link : null);
+              const liveUrl = proj.liveLink || proj.url || proj.website || (proj.link && !proj.link.toLowerCase().includes("github") ? proj.link : null);
+
+              return (
+                <View key={proj.id} style={{ marginBottom: 6 }}>
+                  <View style={styles.itemHeader}>
+                    <Text style={styles.itemTitle}>{proj.name}</Text>
+                    <View style={{ flexDirection: "row", gap: 4, alignItems: "center" }}>
+                      {githubUrl ? (
+                        <Link src={githubUrl.startsWith('http') ? githubUrl : `https://${githubUrl}`} style={styles.link}>GitHub</Link>
+                      ) : null}
+                      {githubUrl && liveUrl ? <Text style={{ fontSize: 8, color: "#9CA3AF" }}>|</Text> : null}
+                      {liveUrl ? (
+                        <Link src={liveUrl.startsWith('http') ? liveUrl : `https://${liveUrl}`} style={styles.link}>Live</Link>
+                      ) : null}
+                    </View>
+                  </View>
+                {(proj.technologies || []).length > 0 ? (
+                  <Text style={{ fontSize: 9, color: "#111827", marginBottom: 2 }}>
+                    <Text style={styles.boldLabel}>Tech Stack: </Text>{proj.technologies.join(", ")}
+                  </Text>
+                ) : null}
+                {((proj.bullets && proj.bullets.length > 0) || proj.description) ? (
+                  <View style={styles.bulletList}>
+                    {(proj.bullets && proj.bullets.length > 0
+                      ? proj.bullets
+                      : [proj.description]
+                    ).map((b, bIdx) => (
+                      b ? (
+                        <Text key={bIdx} style={styles.bulletItem}>
+                          • {b}
+                        </Text>
+                      ) : null
+                    ))}
+                  </View>
+                ) : null}
+              </View>
+            );
+          })}
+          </View>
+        ) : null}
+
+        {certifications.length > 0 ? (
+          <View style={styles.section}>
+            <Text style={styles.sectionTitle}>Certifications</Text>
             {certifications.map((cert) => (
               <View key={cert.id} style={styles.itemHeader}>
                 <Text style={styles.itemTitle}>
@@ -433,21 +291,20 @@ export function ResumePDFDocument({ data }) {
               </View>
             ))}
           </View>
-        )}
+        ) : null}
 
-        {/* Achievements */}
-        {achievements.length > 0 && (
+        {achievements.length > 0 ? (
           <View style={styles.section}>
-            <SectionHeading>Achievements</SectionHeading>
+            <Text style={styles.sectionTitle}>Achievements</Text>
             <View style={styles.bulletList}>
               {achievements.map((ach) => (
-                <Text key={ach.id} style={styles.achievementItem}>
+                <Text key={ach.id} style={styles.bulletItem}>
                   • {ach.title}
                 </Text>
               ))}
             </View>
           </View>
-        )}
+        ) : null}
       </Page>
     </Document>
   );
