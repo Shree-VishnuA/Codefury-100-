@@ -107,9 +107,15 @@ export function ResumeImprover({ user }) {
         body: formData,
       });
 
-      const json = await response.json();
+      let json;
+      try {
+        json = await response.json();
+      } catch (err) {
+        throw new Error("Server took too long to respond or returned an invalid response. Please try again.");
+      }
+
       if (!response.ok || !json.success) {
-        throw new Error(json.error || "Failed to improve resume");
+        throw new Error(json?.error || "Failed to improve resume");
       }
 
       setResult(json.data);

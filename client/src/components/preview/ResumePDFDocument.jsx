@@ -16,11 +16,11 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   name: {
-    fontSize: 22,
+    fontSize: 28,
     fontFamily: "Times-Roman",
     textTransform: "uppercase",
     letterSpacing: 2,
-    marginBottom: 4,
+    marginBottom: 10,
     color: "#111827",
   },
   contactRow: {
@@ -31,12 +31,11 @@ const styles = StyleSheet.create({
     fontSize: 9,
     fontFamily: "Helvetica",
     color: "#374151",
-    marginTop: 2,
   },
   pipe: {
     color: "#9CA3AF",
-    marginHorizontal: 3,
-    fontSize: 8.5,
+    marginHorizontal: 4,
+    fontSize: 9,
   },
   section: {
     marginBottom: 9,

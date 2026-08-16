@@ -315,7 +315,12 @@ RULES:
     const response = await result.response;
 
     let text = response.text() || "";
-    text = text.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/\s*```$/, "").trim();
+    const jsonMatch = text.match(/\{[\s\S]*\}|\[[\s\S]*\]/);
+    if (jsonMatch) {
+      text = jsonMatch[0];
+    } else {
+      text = text.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/\s*```$/, "").trim();
+    }
 
     return JSON.parse(text);
   } catch (error) {
@@ -391,7 +396,12 @@ ${rawText}`;
     const response = await result.response;
 
     let text = response.text() || "";
-    text = text.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/\s*```$/, "").trim();
+    const jsonMatch = text.match(/\{[\s\S]*\}|\[[\s\S]*\]/);
+    if (jsonMatch) {
+      text = jsonMatch[0];
+    } else {
+      text = text.replace(/^```json\s*/i, "").replace(/^```\s*/i, "").replace(/\s*```$/, "").trim();
+    }
 
     return JSON.parse(text);
   } catch (error) {
