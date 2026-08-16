@@ -366,19 +366,7 @@ export default function App() {
                 <Layers className="w-3.5 h-3.5 shrink-0" />
                 Build from Scratch
               </button>
-              <button
-                type="button"
-                onClick={() => setBuilderTab("improve")}
-                className={`flex items-center gap-2 px-4 py-2.5 font-mono text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap border-l ${
-                  builderTab === "improve"
-                    ? "bg-[var(--ink)] dark:bg-[var(--ink-dark)] text-[var(--paper)] dark:text-[var(--paper-dark)]"
-                    : "text-[var(--ink)]/50 dark:text-[var(--ink-dark)]/50 hover:text-[var(--ink)] dark:hover:text-[var(--ink-dark)] hover:bg-[var(--ink)]/[0.04]"
-                }`}
-                style={{ borderColor: "rgba(21,28,36,0.15)" }}
-              >
-                <Sparkles className="w-3.5 h-3.5 shrink-0" />
-                Improve Existing
-              </button>
+             
             </div>
           </div>
 
