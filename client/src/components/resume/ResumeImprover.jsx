@@ -101,7 +101,7 @@ export function ResumeImprover({ user }) {
       formData.append("targetRole", targetRole);
       formData.append("jobDescription", jobDesc);
 
-      const response = await fetch("/api/improve-resume", {
+      const response = await fetch(import.meta.env.VITE_API_URL + "/api/improve-resume", {
         method: "POST",
         headers: user?.email ? { "x-user-id": user.email } : {},
         body: formData,

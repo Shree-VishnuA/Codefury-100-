@@ -138,7 +138,7 @@ export default function App() {
   const saveResumeToBackend = async (dataToSave) => {
     if (!user || !user.email) return;
     try {
-      await fetch("/api/resumes", {
+      await fetch(import.meta.env.VITE_API_URL + "/api/resumes", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -212,7 +212,7 @@ export default function App() {
     }
     setShowAuthModal(false);
 
-    fetch("/api/auth/google", {
+    fetch(import.meta.env.VITE_API_URL + "/api/auth/google", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(userToSet),
@@ -241,7 +241,7 @@ export default function App() {
     setStepErrors({});
 
     try {
-      const response = await fetch("/api/generate-resume", {
+      const response = await fetch(import.meta.env.VITE_API_URL + "/api/generate-resume", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -364,16 +364,15 @@ export default function App() {
               <button
                 type="button"
                 onClick={() => setBuilderTab("scratch")}
-                className={`flex items-center gap-2 px-4 py-2.5 font-mono text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${
-                  builderTab === "scratch"
-                    ? "bg-[var(--ink)] dark:bg-[var(--ink-dark)] text-[var(--paper)] dark:text-[var(--paper-dark)]"
-                    : "text-[var(--ink)]/50 dark:text-[var(--ink-dark)]/50 hover:text-[var(--ink)] dark:hover:text-[var(--ink-dark)] hover:bg-[var(--ink)]/[0.04]"
-                }`}
+                className={`flex items-center gap-2 px-4 py-2.5 font-mono text-xs font-semibold transition-colors cursor-pointer whitespace-nowrap ${builderTab === "scratch"
+                  ? "bg-[var(--ink)] dark:bg-[var(--ink-dark)] text-[var(--paper)] dark:text-[var(--paper-dark)]"
+                  : "text-[var(--ink)]/50 dark:text-[var(--ink-dark)]/50 hover:text-[var(--ink)] dark:hover:text-[var(--ink-dark)] hover:bg-[var(--ink)]/[0.04]"
+                  }`}
               >
                 <Layers className="w-3.5 h-3.5 shrink-0" />
                 Build from Scratch
               </button>
-             
+
             </div>
           </div>
 

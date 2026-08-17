@@ -63,7 +63,7 @@ export function ResumeUploader({ onExtractComplete }) {
     formData.append("resume", file);
 
     try {
-      const response = await fetch("/api/extract-resume", {
+      const response = await fetch(import.meta.env.VITE_API_URL + "/api/extract-resume", {
         method: "POST",
         body: formData,
       });
@@ -77,7 +77,7 @@ export function ResumeUploader({ onExtractComplete }) {
       if (onExtractComplete) {
         onExtractComplete(json.data);
       }
-      
+
       setFile(null);
     } catch (err) {
       console.error("Upload error:", err);
@@ -97,13 +97,12 @@ export function ResumeUploader({ onExtractComplete }) {
       </div>
 
       <div
-        className={`relative flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-xl transition-colors ${
-          dragActive
-            ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
-            : file
+        className={`relative flex flex-col items-center justify-center p-8 border-2 border-dashed rounded-xl transition-colors ${dragActive
+          ? "border-blue-500 bg-blue-50 dark:bg-blue-900/20"
+          : file
             ? "border-green-500 bg-green-50 dark:bg-green-900/10"
             : "border-gray-300 dark:border-gray-700 hover:border-gray-400 dark:hover:border-gray-500 bg-gray-50 dark:bg-gray-800/50"
-        }`}
+          }`}
         onDragEnter={handleDrag}
         onDragLeave={handleDrag}
         onDragOver={handleDrag}

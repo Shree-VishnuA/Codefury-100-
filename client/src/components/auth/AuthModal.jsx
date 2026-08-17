@@ -83,12 +83,12 @@ export function AuthModal({ isOpen, onClose, onSignIn, defaultName = "", default
     }
 
     try {
-      const res = await fetch("/api/auth/google/verify", {
+      const res = await fetch(import.meta.env.VITE_API_URL + "/api/auth/google/verify", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ credential: response.credential }),
       });
-      
+
       const contentType = res.headers.get("content-type");
       if (contentType && contentType.includes("application/json")) {
         const json = await res.json();
