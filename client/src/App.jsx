@@ -249,7 +249,14 @@ export default function App() {
         body: JSON.stringify(resumeData),
       });
 
-      const json = await response.json();
+      // Safe JSON parsing — Vercel can return plain-text error pages on crash
+      const rawText = await response.text();
+      let json;
+      try {
+        json = JSON.parse(rawText);
+      } catch {
+        throw new Error(`Server returned non-JSON response: ${rawText.slice(0, 120)}`);
+      }
 
       if (!json.success || !json.data) {
         throw new Error(json.error || "Failed to generate AI optimizations");

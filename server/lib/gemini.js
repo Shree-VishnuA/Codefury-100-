@@ -187,7 +187,7 @@ export function generateFallbackAIResponse(data) {
 
 export async function processResumeWithGemini(data) {
   const apiKey = process.env.GEMINI_API_KEY;
-  const modelName = process.env.GEMINI_MODEL || "gemini-3.5-flash";
+  const modelName = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 
   if (!apiKey) {
     console.warn("GEMINI_API_KEY is not configured. Falling back to local smart optimizer.");
@@ -225,7 +225,7 @@ export async function processResumeWithGemini(data) {
 
 export async function extractResumeDataWithGemini(rawText) {
   const apiKey = process.env.GEMINI_API_KEY;
-  const modelName = process.env.GEMINI_MODEL || "gemini-3.5-flash";
+  const modelName = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 
   if (!apiKey) {
     throw new Error("GEMINI_API_KEY is not configured.");
@@ -336,7 +336,7 @@ RULES:
 
 export async function improveExistingResumeWithGemini(rawText, targetRole, jobDescription) {
   const apiKey = process.env.GEMINI_API_KEY;
-  const modelName = process.env.GEMINI_MODEL || "gemini-3.5-flash";
+  const modelName = process.env.GEMINI_MODEL || "gemini-2.5-flash";
 
   if (!apiKey) {
     throw new Error("GEMINI_API_KEY is not configured.");
